@@ -3,16 +3,26 @@ import './Navigation.css'
 
 class Navigation extends Component{
 
+    handleClick = () =>{
+        var burger = document.querySelector('.burger')
+        var nav = document.querySelector('#'+burger.dataset.target);
+
+        burger.classList.toggle('is-active')
+        nav.classList.toggle('is-active');
+        
+    }
+
     render(){
 
     return (
         <div className="container">
-            <nav class="navbar is-success" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-black" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
                     <a class="navbar-item" href="https://bulma.io">
-                        <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/>
+                        {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/> */}
+                        <h2>L-Cycle</h2>
                     </a>
-                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
+                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={this.handleClick}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -21,7 +31,7 @@ class Navigation extends Component{
 
                 <div id="navbarBasicExample" class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item">
+                        <a class="navbar-item is-active">
                             Home
                         </a>
 
@@ -34,23 +44,10 @@ class Navigation extends Component{
                         </a>
 
                         <a class="navbar-item">
-                            My L-Cycle
+                            My Class
                         </a>
-                </div>
-
-                <div class="navbar-end">
-                    <div class="navbar-item">
-                        <div class="buttons">
-                        <a class="button is-warning">
-                            <strong>Sign up</strong>
-                        </a>
-                        <a class="button is-dark">
-                            Log in
-                        </a>
-                        </div>
                     </div>
                 </div>
-            </div>
             </nav>
         </div>
     )
