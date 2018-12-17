@@ -39,10 +39,6 @@ class Navigation extends Component{
                         </a>
 
                         <a class="navbar-item">
-                            My Tasks
-                        </a>
-
-                        <a class="navbar-item">
                             My Class
                         </a>
                     </div>

@@ -38,11 +38,11 @@ class App extends Component {
       <Router>
         <div className="App container">
           <Navigation />
-          <div class="columns">
+          <br/>
+          <div class="columns is-centered">
               <div class="column">
                 <CreateLC toggle={this.toggle}/>
               </div>
-                
               <div class="column">
                 <JoinLC toggle={this.toggle}/>
               </div>
@@ -50,10 +50,12 @@ class App extends Component {
                 <DisplayTaskLists toggle={this.toggle}/>
               </div>
           </div>
-          <div class="column is-6-tablet is-4-desktop is-4-fullhd">
+          <div class="columns is-mobile is-centered">
+            <div class="column is-10-mobile is-6-tablet is-4-desktop is-4-fullhd">
             {(this.state.toCreat)? <CreateLCForm/>: null}
             {(this.state.toJoin)? <JoinLCForm/>: null}
             {(this.state.toDisplayTask)? <TaskList/>: null}
+            </div>
           </div>
         </div>
       </Router>
