@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
 
 class CreateLCycle extends Component {
+    handleClick= () =>{
+        this.props.toggle('toCreat', 'toJoin', 'toDisplayTask')
+    }
     render (){
         return (
             <div>
-                <a class="button is-success">Create L-Cycle</a>
+                <a class="button is-success" onClick={this.handleClick}>Create L-Cycle</a>
             </div>
         )
     }
