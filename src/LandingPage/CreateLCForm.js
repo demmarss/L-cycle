@@ -4,11 +4,11 @@ class CreateLCForm extends Component {
     render (){
         return (
             <div>
-                <div class="card">
-                    <header class="card-header">
-                        <h2 class="title is-4">Create L-Cycle</h2>
-                    </header>
-                    <div class="card-content">
+                <article class="message is-success">
+                    <div class="message-header">
+                        <p>Create L-Cycle</p>
+                    </div>
+                    <div class="message-body">
                         <div class="field">
                             <p class="control has-icons-left">
                                 <input class="input" type="password" placeholder="Enter username"/>
@@ -25,9 +25,9 @@ class CreateLCForm extends Component {
                                 Click to Create
                                 </button>
                             </p>
-                        </div>                  
+                        </div>  
                     </div>
-                </div>
+                </article>
             </div>
         )
     }

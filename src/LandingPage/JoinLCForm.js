@@ -4,12 +4,12 @@ class JoinLCForm extends Component {
     render (){
         return (
             <div>
-                <div class="card">
-                    <header class="card-header">
-                        <h2 class="title is-4">Join L-Cycle</h2>
-                    </header>
-                    <div class="card-content">
-                        <div class="field">
+                <article class="message is-primary">
+                    <div class="message-header">
+                        <p>Join L-Cycle</p>
+                    </div>
+                    <div class="message-body">
+                    <div class="field">
                             <p class="control has-icons-left">
                                 <input class="input" type="password" placeholder="Enter L-cycle Code"/>
                             </p>
@@ -20,9 +20,9 @@ class JoinLCForm extends Component {
                                 Click to Join
                                 </button>
                             </p>
-                        </div>                  
+                        </div>  
                     </div>
-                </div>
+                </article>
             </div>
         )
     }

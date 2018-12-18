@@ -41,6 +41,11 @@ class Navigation extends Component{
                         <a class="navbar-item">
                             My Class
                         </a>
+
+                        <a class="navbar-item">
+                            My Tasks
+                        </a>
+
                     </div>
                 </div>
             </nav>

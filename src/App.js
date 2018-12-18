@@ -13,8 +13,6 @@ class App extends Component {
           <Navigation />
           <br/>
           <LandingPage />
-          <hr/>
-          <br/>
         </div>
 
         

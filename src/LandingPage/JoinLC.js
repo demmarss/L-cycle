@@ -9,7 +9,7 @@ class JoinLC extends Component {
     render (){
         return (
             <div>
-                <a class="button is-primary" onClick={this.handleClick}>Join L-Cycle</a>
+                <a class="button is-primary" onClick={this.handleClick}>Join Cycle</a>
             </div>
         )
     }

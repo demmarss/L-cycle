@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import CreateLC from './CreateLC'
 import JoinLC from './JoinLC'
-import TaskList from '../Task/TaskList'
+import CreateTask from '../Task/CreateTaskLandingPage'
 import CreateLCForm from './CreateLCForm'
 import JoinLCForm from './JoinLCForm'
-import DisplayTaskLists from './displayTaskList'
+import DisplayCreateTask from './DisplayCreateTask'
 
 class LandingPage extends Component {
   state ={
@@ -25,9 +25,7 @@ class LandingPage extends Component {
       this.setState({
         [x] : !this.state[x],
       })
-    ) 
-
-    
+    )   
   }
 
   render() {
@@ -35,24 +33,20 @@ class LandingPage extends Component {
         <div>
           <br/>
           V1 Landing Page view
-          <div class="columns is-centered">
-              <div class="column">
-                <CreateLC toggle={this.toggle}/>
-              </div>
-              <div class="column">
-                <JoinLC toggle={this.toggle}/>
-              </div>
-              <div class="column">
-                <DisplayTaskLists toggle={this.toggle}/>
-              </div>
+          <div class="tabs is-centered">
+            <ul>
+              <li ><CreateLC toggle={this.toggle}/></li>
+              <li><JoinLC toggle={this.toggle}/></li>
+              <li><DisplayCreateTask toggle={this.toggle}/></li>
+            </ul>
           </div>
           <div class="columns is-mobile is-centered">
             <div class="column is-10-mobile is-6-tablet is-4-desktop is-4-fullhd">
             {(this.state.toCreat)? <CreateLCForm/>: null}
             {(this.state.toJoin)? <JoinLCForm/>: null}
-            {(this.state.toDisplayTask)? <TaskList/>: null}
             </div>
           </div>
+          {(this.state.toDisplayTask)? <CreateTask/>: null}
         </div>
     );
   }
