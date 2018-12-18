@@ -31,10 +31,11 @@ class LandingPage extends Component {
   render() {
     return (
         <div>
-          <br/>
           V1 Landing Page view
+          <br/>
           <div class="tabs is-centered">
             <ul>
+                
               <li ><CreateLC toggle={this.toggle}/></li>
               <li><JoinLC toggle={this.toggle}/></li>
               <li><DisplayCreateTask toggle={this.toggle}/></li>

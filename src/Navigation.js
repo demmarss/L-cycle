@@ -1,10 +1,13 @@
 import React, {Component} from 'react'
+import { Link } from 'react-router-dom';
+import logo from './image/LClogo.png'
 
 class Navigation extends Component{
 
     handleClick = () =>{
         var burger = document.querySelector('.burger')
         var nav = document.querySelector('#'+burger.dataset.target);
+
 
         burger.classList.toggle('is-active')
         nav.classList.toggle('is-active');
@@ -15,12 +18,14 @@ class Navigation extends Component{
 
     return (
         <div className="container">
-            <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+            <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
                 <div class="navbar-brand">
-                    <a class="navbar-item" href="https://bulma.io">
-                        {/* <img src="https://bulma.io/images/bulma-logo.png" width="112" height="28"/> */}
-                        <h2>L-Cycle</h2>
+                    <a>
+                        <Link to='/'>
+                            <img src={logo}/>
+                        </Link>
                     </a>
+                    
                     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={this.handleClick}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
@@ -30,22 +35,38 @@ class Navigation extends Component{
 
                 <div id="navbarBasicExample" class="navbar-menu">
                     <div class="navbar-start">
-                        <a class="navbar-item is-active">
-                            Home
+                        <a class="navbar-item">
+                            <Link to="/">Home</Link>
                         </a>
 
                         <a class="navbar-item">
-                            Progress
+                            <Link to="/myResult">Progress</Link>
                         </a>
 
                         <a class="navbar-item">
-                            My Class
+                            <Link to="/myClass">My Class</Link>
                         </a>
 
                         <a class="navbar-item">
-                            My Tasks
+                            <Link to="/myTask">My Task</Link>
                         </a>
-
+                    </div>
+                    <div class="navbar-end">
+                        <div class="navbar-item">
+                            <a class="button is-primary">
+                            <Link to="/signUp"><strong>Sign up</strong></Link>
+                            </a>
+                            <a class="button is-light">
+                            <Link to="/logIn">Log in</Link>
+                            </a>
+                            {/* <a class="button is-primary">
+                                <Link to="/myAccount"><strong>MyAccount</strong></Link>
+                            </a>
+                            <a class="button is-light">
+                                Log out
+                            </a> */}
+                            
+                        </div>
                     </div>
                 </div>
             </nav>
