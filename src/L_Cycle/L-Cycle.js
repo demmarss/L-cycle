@@ -19,13 +19,14 @@ class LCycle extends Component {
     render(){
         return (
             <div>
+                <h1> V2 A Single Task view</h1>
                 <div class="columns is-mobile is-centered">
                 <div class="column is-10-mobile is-6-tablet is-4-desktop is-4-fullhd">
                     {/* Details of L-Cycle */}
                     <LCycleDetail />
                     <br/>
                     
-                    {/* Button to Link to create task view */}
+                    {/* Button to Link "Routing needed to got to /task/CreateTaskLandingPAge" to create task view */}
                     <CreateTaskTrigger />
 
                     {/* Button to toggle invite member form*/}

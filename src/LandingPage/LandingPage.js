@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import CreateLC from './CreateLC'
 import JoinLC from './JoinLC'
-import TaskList from './TaskList'
+import TaskList from '../Task/TaskList'
 import CreateLCForm from './CreateLCForm'
 import JoinLCForm from './JoinLCForm'
 import DisplayTaskLists from './displayTaskList'
@@ -32,8 +32,9 @@ class LandingPage extends Component {
 
   render() {
     return (
-        <div className="App container">
+        <div>
           <br/>
+          V1 Landing Page view
           <div class="columns is-centered">
               <div class="column">
                 <CreateLC toggle={this.toggle}/>
