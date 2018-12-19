@@ -5,7 +5,7 @@ class ForgotPassword extends Component {
     render(){
         return(
             <div>
-                <h3 class="title has-text-grey">Need Help!</h3>
+                <h3 class="title has-text-grey">Need Password Help!</h3>
                 <p class="subtitle has-text-grey">Tell us your email</p>
                 <div class="box">
                     <figure class="avatar">

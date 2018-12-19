@@ -8,6 +8,8 @@ import SignUp from './user/CreateAcct'
 import LogIn from './user/LogIn';
 import MyAccount from './user/UserAcctDetail';
 import ForgotPassword from './user/ForgotPassword'
+import Question from './Question/Question'
+import Task from './Task/Task'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
@@ -30,6 +32,8 @@ class App extends Component {
               <Route exact path="/logIn" component={LogIn} />
               <Route exact path="/myAccount" component={MyAccount} />
               <Route exact path="/forgotPassword" component={ForgotPassword}/>
+              <Route exact path ='/question' component={Question} />
+              <Route exact path ='/task' component={Task} />
           </div>
         </div>
 

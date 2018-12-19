@@ -7,7 +7,7 @@ import JoinLCForm from './JoinLCForm'
 import DisplayCreateTask from './DisplayCreateTask'
 
 class LandingPage extends Component {
-  state ={
+  state = {
     toCreat: false,
     toJoin: false,
     toDisplayTask: false
