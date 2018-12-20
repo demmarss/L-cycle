@@ -7,7 +7,7 @@ class CreateLCycle extends Component {
     render (){
         return (
             <div>
-                <a class="button is-success" onClick={this.handleClick}>Create Cycle</a>
+                <p className="button is-success" onClick={this.handleClick}>Create Cycle</p>
             </div>
         )
     }

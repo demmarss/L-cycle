@@ -9,12 +9,12 @@ class ForgotPassword extends Component {
                 <p class="subtitle has-text-grey">Tell us your email</p>
                 <div class="box">
                     <figure class="avatar">
-                        <img src={logo}/>
+                        <img src={logo} alt="logo"/>
                     </figure>
                     <form>
                         <div class="field">
                             <div class="control">
-                                <input class="input" type="email" placeholder="Your Email" autofocus=""/>
+                                <input class="input" type="email" placeholder="Your Email" autoFocus=""/>
                             </div>
                         </div>
                         <button class="button is-block is-danger is-fullwidth">Retrieve Password</button>

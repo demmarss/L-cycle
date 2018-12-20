@@ -1,10 +1,12 @@
 import React, {Component} from 'react'
+import { Line } from 'rc-progress';
 
 class Question extends Component {
 
     state = {
         startTime: Date.now(),
-        endTime: Date.now()
+        endTime: Date.now(),
+        progress: 25
     }
 
     handleFinish = () => {
@@ -25,9 +27,9 @@ class Question extends Component {
         var m = Math.floor(d % 3600 / 60);
         var s = Math.floor(d % 3600 % 60);
 
-        var hDisplay = h > 0 ? h + (h == 1 ? " h, " : " h ") : "";
-        var mDisplay = m > 0 ? m + (m == 1 ? " min, " : " min ") : "";
-        var sDisplay = s > 0 ? s + (s == 1 ? " s" : " s") : "";
+        var hDisplay = h > 0 ? h + (h === 1 ? " h, " : " h ") : "";
+        var mDisplay = m > 0 ? m + (m === 1 ? " min, " : " min ") : "";
+        var sDisplay = s > 0 ? s + (s === 1 ? " s" : " s") : "";
         return hDisplay + mDisplay + sDisplay; 
     }
     
@@ -36,20 +38,20 @@ class Question extends Component {
             <div>
                 <h1>V5 Create New Task Landing Page </h1>
                 <p>Time spent : {this.getTimeDuration()}</p>
-
-                <article class="message is-link">
-                    <div class="message-header">
+                <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />
+                <article className="message is-link">
+                    <div className="message-header">
                         <p>Question number</p>
                         
                     </div>
-                    <div class="message-body">
+                    <div className="message-body">
                         Question here
                     </div>
                 </article>
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-success" onClick={this.handleFinish}>
-                        Submit
+                <div className="field">
+                    <p className="control">
+                        <button className="button is-success" onClick={this.handleFinish}>
+                            Submit
                         </button>
                     </p>
                 </div> 

@@ -22,8 +22,8 @@ class App extends Component {
           <Navigation />
           <br/>
         <Route exact path="/" component={LandingPage} />
-        <div class="columns is-mobile is-centered">
-            <div class="column is-10-mobile is-6-tablet is-6-desktop is-4-fullhd">
+        <div className="columns is-mobile is-centered">
+            <div className="column is-10-mobile is-6-tablet is-6-desktop is-4-fullhd">
               <Route exact path="/myTask" component={TaskList} />
               <Route exact path="/myResult" component={ResultList} />
               <Route exact path="/myClass" component={ClassList} />

@@ -4,24 +4,24 @@ class CreateLCForm extends Component {
     render (){
         return (
             <div>
-                <article class="message is-success">
-                    <div class="message-header">
+                <article className="message is-success">
+                    <div className="message-header">
                         <p>Create L-Cycle</p>
                     </div>
-                    <div class="message-body">
-                        <div class="field">
-                            <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Enter username"/>
+                    <div className="message-body">
+                        <div className="field">
+                            <p className="control has-icons-left">
+                                <input className="input" type="password" placeholder="Enter username"/>
                             </p>
                         </div>
-                        <div class="field">
-                            <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Enter L-cycle title"/>
+                        <div className="field">
+                            <p className="control has-icons-left">
+                                <input className="input" type="password" placeholder="Enter L-cycle title"/>
                             </p>
                         </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button is-warning">
+                        <div className="field">
+                            <p className="control">
+                                <button className="button is-warning">
                                 Click to Create
                                 </button>
                             </p>

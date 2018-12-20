@@ -4,19 +4,19 @@ class JoinLCForm extends Component {
     render (){
         return (
             <div>
-                <article class="message is-primary">
-                    <div class="message-header">
+                <article className="message is-primary">
+                    <div className="message-header">
                         <p>Join L-Cycle</p>
                     </div>
-                    <div class="message-body">
-                    <div class="field">
-                            <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Enter L-cycle Code"/>
+                    <div className="message-body">
+                    <div className="field">
+                            <p className="control has-icons-left">
+                                <input className="input" type="password" placeholder="Enter L-cycle Code"/>
                             </p>
                         </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button is-success">
+                        <div className="field">
+                            <p className="control">
+                                <button className="button is-success">
                                 Click to Join
                                 </button>
                             </p>

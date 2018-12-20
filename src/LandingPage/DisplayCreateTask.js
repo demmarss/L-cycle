@@ -9,7 +9,7 @@ class DisplayTaskLists extends Component {
     render (){
         return (
             <div>
-                <a class="button is-danger" onClick={this.handleClick}>Create Tasks</a>
+                <p className="button is-danger" onClick={this.handleClick}>Create Tasks</p>
             </div>
         )
     }

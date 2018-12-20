@@ -9,18 +9,19 @@ class Task extends Component {
         return (
             <div>
                 
-                    <div class="card">  
-                        <header class="card-header">    
-                            <h2 class="title is-4"> V4 Task title</h2>  
+                    <div className="card">  
+                        <header className="card-header">    
+                            <h2 className="title is-4"> V4 Task title</h2>  
                         </header>
-                        <div class="card-content">    
+                        <div className="card-content">    
                             <p>Some details here</p>
                             <p>Some details here</p>
                             <p>Some details here</p>
                         </div>
-                        <a class="button is-warning">
-                            <Link to="/question">Click to start</Link>
-                        </a>
+                        <Link className="button is-warning" to="/question">
+                            Click to start
+                        </Link>
+                        
                     </div>                
             </div>
         )

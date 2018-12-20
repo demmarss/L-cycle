@@ -5,24 +5,24 @@ class TaskList extends Component {
     render(){
         return (
             <div>
-                <h1 class="title is-4">V9  L-Cycle Lists</h1>
+                <h1 className="title is-4">V9  L-Cycle Lists</h1>
                 <ul>
                     <li>
-                        <div class="card">  
-                            <header class="card-header">    
-                                <h2 class="title is-4">L-Cycle 1</h2>  
+                        <div className="card">  
+                            <header className="card-header">    
+                                <h2 className="title is-4">L-Cycle 1</h2>  
                             </header>
-                            <div class="card-content">    
+                            <div className="card-content">    
                                 <p>Some details here</p>
                             </div>
                         </div>
                     </li>
                     <li>
-                    <div class="card">  
-                            <header class="card-header">    
-                                <h2 class="title is-4">L-Cycle 2</h2>  
+                    <div className="card">  
+                            <header className="card-header">    
+                                <h2 className="title is-4">L-Cycle 2</h2>  
                             </header>
-                            <div class="card-content">    
+                            <div className="card-content">    
                                 <p>Some details here</p>
                             </div>
                         </div>

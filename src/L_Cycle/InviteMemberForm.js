@@ -4,19 +4,19 @@ class InviteMember extends Component {
     render (){
         return (
             <div>
-                <div class="card">
-                    <header class="card-header">
-                        <h2 class="title is-4">Invite Member</h2>
+                <div className="card">
+                    <header className="card-header">
+                        <h2 className="title is-4">Invite Member</h2>
                     </header>
-                    <div class="card-content">
-                        <div class="field">
-                            <p class="control has-icons-left">
-                                <input class="input" type="password" placeholder="Enter username or email separted by comma"/>
+                    <div className="card-content">
+                        <div className="field">
+                            <p className="control has-icons-left">
+                                <input className="input" type="password" placeholder="Enter username or email separted by comma"/>
                             </p>
                         </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button is-warning">
+                        <div className="field">
+                            <p className="control">
+                                <button className="button is-warning">
                                 Send invitation
                                 </button>
                             </p>

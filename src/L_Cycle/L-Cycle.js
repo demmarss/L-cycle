@@ -20,8 +20,8 @@ class LCycle extends Component {
         return (
             <div>
                 <h1> V2 A Single Task view</h1>
-                <div class="columns is-mobile is-centered">
-                <div class="column is-10-mobile is-6-tablet is-4-desktop is-4-fullhd">
+                <div className="columns is-mobile is-centered">
+                <div className="column is-10-mobile is-6-tablet is-4-desktop is-4-fullhd">
                     {/* Details of L-Cycle */}
                     <LCycleDetail />
                     <br/>

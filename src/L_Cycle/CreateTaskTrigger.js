@@ -4,9 +4,9 @@ class CreateTaskTrigger extends Component {
 
     render (){
         return(
-            <div class="field">
-                <p class="control">
-                    <button class="button is-warning">
+            <div className="field">
+                <p className="control">
+                    <button className="button is-warning">
                     Create Task
                     </button>
                 </p>

@@ -4,9 +4,9 @@ class DisplayInivteMember extends Component {
 
     render (){
         return(
-            <div class="field">
-                <p class="control">
-                    <button class="button is-success" onClick={this.props.inviteMember}>
+            <div className="field">
+                <p className="control">
+                    <button className="button is-success" onClick={this.props.inviteMember}>
                     Invite Member
                     </button>
                 </p>

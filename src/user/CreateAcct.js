@@ -5,31 +5,31 @@ class CreateAcct extends Component {
     render(){
         return(
             <div>
-                <h3 class="title has-text-grey">Create Account </h3>
-                <p class="subtitle has-text-grey">Please sigup to proceed.</p>
-                <div class="box">
-                    <figure class="avatar">
-                        <img src={logo}/>
+                <h3 className="title has-text-grey">Create Account </h3>
+                <p className="subtitle has-text-grey">Please sigup to proceed.</p>
+                <div className="box">
+                    <figure className="avatar">
+                        <img src={logo} alt="logo"/>
                     </figure>
                     <form>
-                        <div class="field">
-                            <div class="control">
-                                <input class="input" type="email" placeholder="Your Username" autofocus=""/>
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" type="email" placeholder="Your Username" autoFocus=""/>
                             </div>
                         </div>
 
-                        <div class="field">
-                            <div class="control">
-                                <input class="input" type="email" placeholder="Your Email" autofocus=""/>
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" type="email" placeholder="Your Email" autoFocus=""/>
                             </div>
                         </div>
 
-                        <div class="field">
-                            <div class="control">
-                                <input class="input" type="password" placeholder="Your Password"/>
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" type="password" placeholder="Your Password"/>
                             </div>
                         </div>
-                        <button class="button is-block is-success is-fullwidth">Register</button>
+                        <button className="button is-block is-success is-fullwidth">Register</button>
                     </form>
                 </div> 
             </div>

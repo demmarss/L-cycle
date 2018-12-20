@@ -1,46 +1,88 @@
 import React, {Component} from 'react'
 import logo from '../image/LClogo.png'
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux'
+import { setAuthedUser } from '../actions/authUser'
 
 class LogIn extends Component {
+
+    state = {
+        username: "",
+        password: '',
+        rememberme: false,
+        toHome: false
+      };
+    
+      handleChange = prop => event => {
+        this.setState({ [prop]: event.target.value });
+      };
+
+
+    
+      handleSubmit = e => {
+        e.preventDefault();
+        
+        const { username } = this.state;
+        const { dispatch } = this.props;
+    
+        dispatch(setAuthedUser(username));
+    
+        this.setState(currentState => ({
+          toHome: currentState.username ? true : false
+        }));
+      };
+
+      isEmpty() {
+        return this.state.username === "" && this.state.password === "";
+      }
+
+
+
+
+
     render(){
+        if (this.state.toHome === true) {
+            return <Redirect to="/" />;
+          }
+
         return(
             <div>
-                <h3 class="title has-text-grey">Login</h3>
-                <p class="subtitle has-text-grey">Please login to proceed.</p>
-                <div class="box">
-                    <figure class="avatar">
-                        <img src={logo}/>
+                <h3 className="title has-text-grey">Login</h3>
+                <p className="subtitle has-text-grey">Please login to proceed.</p>
+                <div className="box">
+                    <figure className="avatar" >
+                        <img src={logo} alt="logo"/>
                     </figure>
-                    <form>
-                        <div class="field">
-                            <div class="control">
-                                <input class="input" type="email" placeholder="Your Email" autofocus=""/>
+                    <form onSubmit={this.handleSubmit}>
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" value={this.state.username} type="text" placeholder="Your username" autoFocus="" onChange={this.handleChange('username')}/>
                             </div>
                         </div>
 
-                        <div class="field">
-                            <div class="control">
-                                <input class="input" type="password" placeholder="Your Password"/>
+                        <div className="field">
+                            <div className="control">
+                                <input className="input" value={this.state.password} type="password" placeholder="Your Password" onChange={this.handleChange('password')}/>
                             </div>
                         </div>
-                        <div class="field">
-                            <label class="checkbox">
-                                <input type="checkbox"/>
+                        <div className="field">
+                            <label className="checkbox">
+                                <input type="checkbox" value={this.state.rememberme} onChange={this.handleChange('rememberme')}/>
                                 Remember me
                             </label>
                         </div>
-                        <button class="button is-block is-info is-fullwidth">Login</button>
+                        <button type='submit' className="button is-block is-info is-fullwidth" disabled={this.isEmpty()}>Login</button>
                     </form>
                 </div>
-                <p class="has-text-grey">
-                    <a><Link to="/signUp"><strong>Sign up</strong></Link></a> &nbsp;·&nbsp;
-                    <a><Link to="/forgotPassword">Forgot Password</Link></a> &nbsp;·&nbsp;
-                    <a href="../">Need Help?</a>
+                <p className="has-text-grey">
+                    <Link to="/signUp"><strong>Sign up</strong></Link> &nbsp;·&nbsp;
+                    <Link to="/forgotPassword">Forgot Password</Link> &nbsp;·&nbsp;
+                    Need Help?
                 </p>   
             </div>
         )
     }
 }
 
-export default LogIn
+// this will create props and give access to dispatch methods
+export default connect()(LogIn);

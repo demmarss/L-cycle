@@ -5,12 +5,12 @@ class Result extends Component {
         return(
             <div>
                 <h1>V6 Create New Task Landing Page </h1>
-                <article class="message is-info">
-                    <div class="message-header">
+                <article className="message is-info">
+                    <div className="message-header">
                         <p>Task Title</p>
-                        <button class="delete" aria-label="delete"></button>
+                        <button className="delete" aria-label="delete"></button>
                     </div>
-                    <div class="message-body">
+                    <div className="message-body">
                         Graph appear here
                         <br/>
                         <br/>
@@ -18,9 +18,9 @@ class Result extends Component {
                         <br/>
                     </div>
                 </article>
-                <div class="field">
-                    <p class="control">
-                        <button class="button is-success">
+                <div className="field">
+                    <p className="control">
+                        <button className="button is-success">
                         Try Again
                         </button>
                     </p>

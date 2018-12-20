@@ -1,13 +1,14 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment} from 'react'
 import { Link } from 'react-router-dom';
 import logo from './image/LClogo.png'
+import { connect } from 'react-redux'
+import { logoutUser } from './actions/authUser'
 
 class Navigation extends Component{
 
     handleClick = () =>{
         var burger = document.querySelector('.burger')
         var nav = document.querySelector('#'+burger.dataset.target);
-
 
         burger.classList.toggle('is-active')
         nav.classList.toggle('is-active');
@@ -16,55 +17,63 @@ class Navigation extends Component{
 
     render(){
 
+        const { authedUser, dispatch } = this.props
+        console.log (authedUser)
     return (
         <div className="container">
-            <nav class="navbar is-warning" role="navigation" aria-label="main navigation">
-                <div class="navbar-brand">
-                    <a>
-                        <Link to='/'>
-                            <img src={logo}/>
-                        </Link>
-                    </a>
+            <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
+                <div className="navbar-brand">
+                
+                    <Link to='/'>
+                        <img src={logo} alt="logo"/>
+                    </Link>
                     
-                    <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={this.handleClick}>
+                    <p role="button" className="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample" onClick={this.handleClick}>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
                     <span aria-hidden="true"></span>
-                    </a>
+                    </p>
                 </div>
 
-                <div id="navbarBasicExample" class="navbar-menu">
-                    <div class="navbar-start">
-                        <a class="navbar-item">
-                            <Link to="/">Home</Link>
-                        </a>
+                <div id="navbarBasicExample" className="navbar-menu">
+                    <div className="navbar-start">
+                        <Link to="/" className="navbar-item">
+                            Home
+                        </Link>
 
-                        <a class="navbar-item">
-                            <Link to="/myResult">Progress</Link>
-                        </a>
+                        <Link to="/myResult" className="navbar-item">
+                            Progress
+                        </Link>
 
-                        <a class="navbar-item">
-                            <Link to="/myClass">My Class</Link>
-                        </a>
+                        <Link to="/myClass" className="navbar-item">
+                            My Class
+                        </Link>
 
-                        <a class="navbar-item">
-                            <Link to="/myTask">My Task</Link>
-                        </a>
+                        <Link to="/myTask" className="navbar-item">
+                            My Task
+                        </Link>
                     </div>
-                    <div class="navbar-end">
-                        <div class="navbar-item">
-                            <a class="button is-primary">
-                            <Link to="/signUp"><strong>Sign up</strong></Link>
-                            </a>
-                            <a class="button is-light">
-                            <Link to="/logIn">Log in</Link>
-                            </a>
-                            {/* <a class="button is-primary">
-                                <Link to="/myAccount"><strong>MyAccount</strong></Link>
-                            </a>
-                            <a class="button is-light">
-                                Log out
-                            </a> */}
+                    <div className="navbar-end">
+                        <div className="navbar-item">
+                        {!authedUser?  
+                            <Fragment>
+                                <Link to="/signUp" className="button is-primary">
+                                    <strong>Sign up</strong>
+                                </Link>
+                                <Link to="/logIn" className="button is-light">
+                                    Log in
+                                </Link>
+                            </Fragment>
+                            :
+                            <Fragment>
+                                <p>Hello {authedUser}</p>
+                                <Link to="/myAccount" className="button is-primary">
+                                    <strong>MyAccount</strong>
+                                </Link>
+                                <Link to="/logIn" className="button is-light">
+                                    <p onClick={()=>dispatch(logoutUser(authedUser))}>Log out</p>
+                                </Link>
+                            </Fragment> } 
                             
                         </div>
                     </div>
@@ -75,5 +84,11 @@ class Navigation extends Component{
 }
 }
 
-export default Navigation 
+function mapStateToProps({ authedUser}) {
+    return {
+      authedUser
+    };
+  }
+
+export default connect(mapStateToProps)(Navigation)
 
