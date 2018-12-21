@@ -70,8 +70,8 @@ class Navigation extends Component{
                                 <Link to="/myAccount" className="button is-primary">
                                     <strong>MyAccount</strong>
                                 </Link>
-                                <Link to="/logIn" className="button is-light">
-                                    <p onClick={()=>dispatch(logoutUser(authedUser))}>Log out</p>
+                                <Link to="/" className="button is-light" onClick={()=>dispatch(logoutUser(authedUser))}>
+                                    Log out
                                 </Link>
                             </Fragment> } 
                             

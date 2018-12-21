@@ -10,19 +10,26 @@ import MyAccount from './user/UserAcctDetail';
 import ForgotPassword from './user/ForgotPassword'
 import Question from './Question/Question'
 import Task from './Task/Task'
+import { connect } from 'react-redux'
+// import handleInitialData from './actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 
 class App extends Component {
 
+  // componentDidMount(){
+  //   this.props.dispatch(handleInitialData())
+  //   }
+
   render() {
+
     return (
       <Router>
         <div className="App container">
           <Navigation />
           <br/>
-        <Route exact path="/" component={LandingPage} />
-        <div className="columns is-mobile is-centered">
+          <Route exact path="/" component={LandingPage} />
+          <div className="columns is-mobile is-centered">
             <div className="column is-10-mobile is-6-tablet is-6-desktop is-4-fullhd">
               <Route exact path="/myTask" component={TaskList} />
               <Route exact path="/myResult" component={ResultList} />
@@ -38,12 +45,10 @@ class App extends Component {
         </div>
 
         </div>
-
-        
       </Router>
 
     );
   }
 }
 
-export default App;
+export default connect()(App);
