@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import {Link} from 'react-router-dom'
 
 class CreatTaskLandingPage extends Component {
     render(){
@@ -6,6 +7,14 @@ class CreatTaskLandingPage extends Component {
             <div>
                 <h1>V7 Create New Task Landing Page </h1>
                 <div className="columns is-mobile is-multiline is-centered">
+                    <Link to='/subtraction'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Subtraction</code><br/>
+                            Subtraction
+                            </p>
+                        </div>
+                    </Link>
                     <div className="column is-narrow">
                         <p className="bd-notification is-primary">
                         <code className="html">Arithmetics</code><br/>

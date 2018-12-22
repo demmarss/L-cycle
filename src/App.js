@@ -10,6 +10,7 @@ import MyAccount from './user/UserAcctDetail';
 import ForgotPassword from './user/ForgotPassword'
 import Question from './Question/Question'
 import Task from './Task/Task'
+import Subtraction from './Maths/Subtraction/subtraction'
 import { connect } from 'react-redux'
 // import handleInitialData from './actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
@@ -41,6 +42,7 @@ class App extends Component {
               <Route exact path="/forgotPassword" component={ForgotPassword}/>
               <Route exact path ='/question' component={Question} />
               <Route exact path ='/task' component={Task} />
+              <Route exact path='/subtraction' component = {Subtraction}/>
           </div>
         </div>
 

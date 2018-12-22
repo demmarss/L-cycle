@@ -36,10 +36,6 @@ class LogIn extends Component {
         return this.state.username === "" && this.state.password === "";
       }
 
-
-
-
-
     render(){
         if (this.state.toHome === true) {
             return <Redirect to="/" />;
