@@ -41,7 +41,7 @@ export default class Subtraction extends Component {
         const {questions, answeredQuestions} = this.state;
         return (
           <div className="App">
-            <h1 class='title'>Substraction</h1>
+            <h1 className='title'>Division</h1>
             <br/>
             {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}

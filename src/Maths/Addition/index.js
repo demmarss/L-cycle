@@ -4,7 +4,7 @@ import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
 
-export default class Subtraction extends Component {
+export default class Addition extends Component {
     state = {
         status: "",
         questions: [],
@@ -32,8 +32,6 @@ export default class Subtraction extends Component {
 
         let result = correct* 100/this.state.answeredQuestions.length
 
-
-
         return result + '%'
     }
 
@@ -41,8 +39,7 @@ export default class Subtraction extends Component {
         const {questions, answeredQuestions} = this.state;
         return (
           <div className="App">
-            <h1 class='title'>Substraction</h1>
-            <br/>
+            <h1 className="title">Addition</h1>
             {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
             {(this.state.status === 'finish')? <ResultDisplay questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}

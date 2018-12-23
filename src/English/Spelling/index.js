@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import SetQuestionNumber from './setQuNum'
+import SetQuestion from './setQu'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
@@ -41,9 +41,9 @@ export default class Subtraction extends Component {
         const {questions, answeredQuestions} = this.state;
         return (
           <div className="App">
-            <h1 class='title'>Substraction</h1>
+            <h1>Substraction</h1>
             <br/>
-            {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
+            {(this.state.status === '')? <SetQuestion qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
             {(this.state.status === 'finish')? <ResultDisplay questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
             {(this.state.status ==='review')? <ReviewDisplay questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null}

@@ -54,20 +54,20 @@ class SetQuestionNumber extends Component {
                 x = Math.floor(Math.random() * 10000)
                 y = Math.floor(Math.random() * 10000)
                 break
-            case 'subtracting_1':
-                x = Math.floor(Math.random() * 10) + 1
+            case 'adding_1':
+                x = Math.floor(Math.random() * 10)
                 y = 1
                 break
-            case 'subtracting_2':
-                x = Math.floor(Math.random() * 10) +2
+            case 'adding_2':
+                x = Math.floor(Math.random() * 10)
                 y = 2
                 break
-            case 'subtracting_5':
-                x = Math.floor(Math.random() * 10) +5
+            case 'adding_5':
+                x = Math.floor(Math.random() * 10)
                 y = 5
                 break
-            case 'subtracting_10':
-                x = Math.floor(Math.random() * 90) + 10
+            case 'adding_10':
+                x = Math.floor(Math.random() * 90)
                 y = 10
                 break
             default:
@@ -75,16 +75,10 @@ class SetQuestionNumber extends Component {
                 y = 0
         }
 
-        if (x < y){
-            let holder = y
-            y = x
-            x = holder
-        }
-
         let question=  {
                                 number1: x,
                                 number2: y,
-                                answer: x - y,
+                                answer: x + y,
                                 typedAnswer: Number,
                                 remark: ''
                                 }
@@ -136,20 +130,20 @@ class SetQuestionNumber extends Component {
                         {(this.state.advanceSetiing)?
                             (<div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_1"/>
-                                    Subtracting 1
+                                    <input type="radio" name='level' value="adding_1"/>
+                                    Adding 1
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_2"/>
-                                    Subtracting 2
+                                    <input type="radio" name='level' value="adding_2"/>
+                                    Adding 2
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_5"/>
-                                    Subtracting 5
+                                    <input type="radio" name='level' value="adding_5"/>
+                                    Adding 5
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_10"/>
-                                    Subtracting 10
+                                    <input type="radio" name='level' value="adding_10"/>
+                                    Adding 10
                                 </label>
                             </div>): null
                         }

@@ -54,37 +54,59 @@ class SetQuestionNumber extends Component {
                 x = Math.floor(Math.random() * 10000)
                 y = Math.floor(Math.random() * 10000)
                 break
-            case 'subtracting_1':
-                x = Math.floor(Math.random() * 10) + 1
-                y = 1
-                break
-            case 'subtracting_2':
-                x = Math.floor(Math.random() * 10) +2
+            case 'multiplying_2':
+                x = Math.floor(Math.random() * 12)
                 y = 2
                 break
-            case 'subtracting_5':
-                x = Math.floor(Math.random() * 10) +5
+            case 'multiplying_3':
+                x = Math.floor(Math.random() * 12)
+                y = 3
+                break
+            case 'multiplying_4':
+                x = Math.floor(Math.random() * 12)
+                y = 4
+                break
+            case 'multiplying_5':
+                x = Math.floor(Math.random() * 12)
                 y = 5
                 break
-            case 'subtracting_10':
-                x = Math.floor(Math.random() * 90) + 10
+            case 'multiplying_6':
+                x = Math.floor(Math.random() * 12)
+                y = 6
+                break
+            case 'multiplying_7':
+                x = Math.floor(Math.random() * 12)
+                y = 7
+                break
+            case 'multiplying_8':
+                x = Math.floor(Math.random() * 12)
+                y = 8
+                break
+            case 'multiplying_9':
+                x = Math.floor(Math.random() * 12)
+                y = 9
+                break
+            case 'multiplying_10':
+                x = Math.floor(Math.random() * 12)
                 y = 10
+                break
+            case 'multiplying_11':
+                x = Math.floor(Math.random() * 12)
+                y = 11
+                break
+            case 'multiplying_12':
+                x = Math.floor(Math.random() * 12)
+                y = 12
                 break
             default:
                 x = 0
                 y = 0
         }
 
-        if (x < y){
-            let holder = y
-            y = x
-            x = holder
-        }
-
         let question=  {
                                 number1: x,
                                 number2: y,
-                                answer: x - y,
+                                answer: x * y,
                                 typedAnswer: Number,
                                 remark: ''
                                 }
@@ -136,20 +158,48 @@ class SetQuestionNumber extends Component {
                         {(this.state.advanceSetiing)?
                             (<div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_1"/>
-                                    Subtracting 1
+                                    <input type="radio" name='level' value="multiplying_2"/>
+                                    X 2
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_2"/>
-                                    Subtracting 2
+                                    <input type="radio" name='level' value="multiplying_3"/>
+                                    X 3
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_5"/>
-                                    Subtracting 5
+                                    <input type="radio" name='level' value="multiplying_4"/>
+                                    X 4
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_10"/>
-                                    Subtracting 10
+                                    <input type="radio" name='level' value="multiplying_5"/>
+                                    X 5
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_6"/>
+                                    X 6
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_7"/>
+                                    X 7
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_8"/>
+                                    X 8
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_9"/>
+                                    X 9
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_10"/>
+                                    X 10
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_11"/>
+                                    X 11
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="multiplying_12"/>
+                                    X 12
                                 </label>
                             </div>): null
                         }

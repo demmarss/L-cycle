@@ -52,7 +52,10 @@ class LogIn extends Component {
                     <form onSubmit={this.handleSubmit}>
                         <div className="field">
                             <div className="control">
-                                <input className="input" value={this.state.username} type="text" placeholder="Your username" autoFocus="" onChange={this.handleChange('username')}/>
+                                <input className="input" 
+                                value={this.state.username} 
+                                type="text" placeholder="Your username" 
+                                autoFocus="" onChange={this.handleChange('username')}/>
                             </div>
                         </div>
 

@@ -15,6 +15,38 @@ class CreatTaskLandingPage extends Component {
                             </p>
                         </div>
                     </Link>
+                    <Link to='/addition'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Addition</code><br/>
+                            Addition
+                            </p>
+                        </div>
+                    </Link>
+                    <Link to='/multiplication'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Multiplication</code><br/>
+                            Multiplication
+                            </p>
+                        </div>
+                    </Link>
+                    <Link to='/division'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Division</code><br/>
+                            Division
+                            </p>
+                        </div>
+                    </Link>
+                    <Link to='/division'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Phonics</code><br/>
+                            Phonics
+                            </p>
+                        </div>
+                    </Link>
                     <div className="column is-narrow">
                         <p className="bd-notification is-primary">
                         <code className="html">Arithmetics</code><br/>

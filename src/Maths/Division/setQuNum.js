@@ -40,51 +40,73 @@ class SetQuestionNumber extends Component {
         switch (this.state.level){
             case 'level_1':
                 x = Math.floor(Math.random() * 10)
-                y = Math.floor(Math.random() * 10)
+                y = Math.floor(Math.random() * 10)+1
                 break
             case 'level_2':
                 x = Math.floor(Math.random() * 100)
-                y = Math.floor(Math.random() * 100)
+                y = Math.floor(Math.random() * 10)+1
                 break
             case 'level_3':
                 x = Math.floor(Math.random() * 1000)
-                y = Math.floor(Math.random() * 1000)
+                y = Math.floor(Math.random() * 10)+1
                 break
             case 'level_4':
                 x = Math.floor(Math.random() * 10000)
-                y = Math.floor(Math.random() * 10000)
+                y = Math.floor(Math.random() * 100)+1
                 break
-            case 'subtracting_1':
-                x = Math.floor(Math.random() * 10) + 1
-                y = 1
-                break
-            case 'subtracting_2':
-                x = Math.floor(Math.random() * 10) +2
+            case 'dividing_2':
+                x = Math.floor(Math.random() * 12) * 2
                 y = 2
                 break
-            case 'subtracting_5':
-                x = Math.floor(Math.random() * 10) +5
+            case 'dividing_3':
+                x = Math.floor(Math.random() * 12) * 3
+                y = 3
+                break
+            case 'dividing_4':
+                x = Math.floor(Math.random() * 12) * 4
+                y = 4
+                break
+            case 'dividing_5':
+                x = Math.floor(Math.random() * 12) * 5
                 y = 5
                 break
-            case 'subtracting_10':
-                x = Math.floor(Math.random() * 90) + 10
+            case 'dividing_6':
+                x = Math.floor(Math.random() * 12) * 6
+                y = 6
+                break
+            case 'dividing_7':
+                x = Math.floor(Math.random() * 12) *7
+                y = 7
+                break
+            case 'dividing_8':
+                x = Math.floor(Math.random() * 12) * 8
+                y = 8
+                break
+            case 'dividing_9':
+                x = Math.floor(Math.random() * 12) * 9
+                y = 9
+                break
+            case 'dividing_10':
+                x = Math.floor(Math.random() * 12) * 10
                 y = 10
+                break
+            case 'dividing_11':
+                x = Math.floor(Math.random() * 12) * 11
+                y = 11
+                break
+            case 'dividing_12':
+                x = Math.floor(Math.random() * 12) * 12
+                y = 12
                 break
             default:
                 x = 0
                 y = 0
         }
 
-        if (x < y){
-            let holder = y
-            y = x
-            x = holder
-        }
-
         let question=  {
                                 number1: x,
                                 number2: y,
-                                answer: x - y,
+                                answer: x / y,
                                 typedAnswer: Number,
                                 remark: ''
                                 }
@@ -136,20 +158,48 @@ class SetQuestionNumber extends Component {
                         {(this.state.advanceSetiing)?
                             (<div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_1"/>
-                                    Subtracting 1
+                                    <input type="radio" name='level' value="dividing_2"/>
+                                    / 2
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_2"/>
-                                    Subtracting 2
+                                    <input type="radio" name='level' value="dividing_3"/>
+                                    / 3
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_5"/>
-                                    Subtracting 5
+                                    <input type="radio" name='level' value="dividing_4"/>
+                                    / 4
                                 </label>
                                 <label className="radio">
-                                    <input type="radio" name='level' value="subtracting_10"/>
-                                    Subtracting 10
+                                    <input type="radio" name='level' value="dividing_5"/>
+                                    / 5
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_6"/>
+                                    / 6
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_7"/>
+                                    / 7
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_8"/>
+                                    / 8
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_9"/>
+                                    / 9
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_10"/>
+                                    / 10
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="dividing_11"/>
+                                    / 11
+                                </label>
+                                <label className="radio">
+                                    <input type="radio" name='level' value="mdividing_12"/>
+                                    / 12
                                 </label>
                             </div>): null
                         }

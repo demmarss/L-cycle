@@ -77,7 +77,7 @@ class QuestionDisplay extends Component {
                             </div>
                             <div className="message-body has-text-right title">
                                 <h1>{this.props.Questions[this.state.counter].number1}</h1>
-                                <h1> - {this.props.Questions[this.state.counter].number2} </h1>
+                                <h1> / {this.props.Questions[this.state.counter].number2} </h1>
                                 <input className="input title" type="number" placeholder="=" onInput={this.handleChange}/>
                                 <br/>
                             </div>

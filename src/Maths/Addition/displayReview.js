@@ -25,7 +25,7 @@ function ReviewDisplay({questions, answered, Status}){
                     {answered.map(x => 
                         <tr key={answered.indexOf(x)}>
                             <th>{answered.indexOf(x) + 1}</th>
-                            <th>{x.number1} - {x.number2} </th>
+                            <th>{x.number1} + {x.number2} </th>
                             <th>{x.answer} </th>
                             <th> {x.typedAnswer} </th>
                             <th> {x.remark} </th>
