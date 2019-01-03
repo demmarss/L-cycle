@@ -47,6 +47,14 @@ class CreatTaskLandingPage extends Component {
                             </p>
                         </div>
                     </Link>
+                    <Link to='/spelling'>
+                        <div className="column is-narrow">
+                            <p className="bd-notification is-primary">
+                            <code className="html">Spelling</code><br/>
+                            Spelling
+                            </p>
+                        </div>
+                    </Link>
                     <div className="column is-narrow">
                         <p className="bd-notification is-primary">
                         <code className="html">Arithmetics</code><br/>
@@ -57,12 +65,6 @@ class CreatTaskLandingPage extends Component {
                         <p className="bd-notification is-primary">
                         <code className="html">Fraction</code><br/>
                         Our Second Column
-                        </p>
-                    </div>
-                    <div className="column is-narrow">
-                        <p className="bd-notification is-primary">
-                        <code className="html">Spelling</code><br/>
-                        Third Column
                         </p>
                     </div>
                     <div className="column is-narrow">

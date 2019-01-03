@@ -3,20 +3,34 @@ import SetQuestionNumber from './setQuNum'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
+import {handleCreateTask} from '../../actions/tasks'
+import { connect } from 'react-redux'
 
-export default class Subtraction extends Component {
+class Multiplication extends Component {
     state = {
         status: "",
         questions: [],
-        answeredQuestions:[]
+        answeredQuestions:[],
+        lgroupId: ""
       }
 
-    setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions) => {
+      setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions, lgroupId="") => {
         this.setState({
             status: passedstatus,
             questions: questions,
-            answeredQuestions: answeredQuestions
+            answeredQuestions: answeredQuestions,
+            lgroupId: lgroupId
         })
+
+        const { dispatch, authedUser } = this.props;
+        let task = {
+                    topic: 'Multiplication',
+                    user: authedUser._id,
+                    questions: questions,
+                    scoreHistory: []
+                    }
+
+        dispatch(handleCreateTask(task, lgroupId))
     }
 
     setQuestions = (q) => {
@@ -52,3 +66,10 @@ export default class Subtraction extends Component {
       }
 
 }
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser,
+      learningCycle
+    };
+  }
+export default connect(mapStateToProps)(Multiplication)

@@ -1,20 +1,24 @@
 import React, {Component} from 'react'
-import SetQuestion from './setQu'
+import SetQuestion from './createTask'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
+import onCreateQuestions from './SpellingService'
 
-export default class Subtraction extends Component {
+export default class Spelling extends Component {
     state = {
         status: "",
         questions: [],
+        realQuestions: [],
         answeredQuestions:[]
       }
 
     setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions) => {
+
         this.setState({
             status: passedstatus,
             questions: questions,
+            realQuestions: onCreateQuestions(questions),
             answeredQuestions: answeredQuestions
         })
     }
@@ -38,15 +42,16 @@ export default class Subtraction extends Component {
     }
 
       render() {
-        const {questions, answeredQuestions} = this.state;
+        const {realQuestions, questions, answeredQuestions} = this.state;
+        console.log(realQuestions)
         return (
           <div className="App">
-            <h1>Substraction</h1>
+            <h1 className='title'>Spelling</h1>
             <br/>
-            {(this.state.status === '')? <SetQuestion qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
-            {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
-            {(this.state.status === 'finish')? <ResultDisplay questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
-            {(this.state.status ==='review')? <ReviewDisplay questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null}
+            {(this.state.status === '')? <SetQuestion Status={this.setStatus}/> : null}
+            {(this.state.status === 'start')? <QuestionDisplay RealQuestions={realQuestions} Questions={questions} Status={this.setStatus}/>: null}
+            {(this.state.status === 'finish')? <ResultDisplay RealQuestions={realQuestions} questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
+            {(this.state.status ==='review')? <ReviewDisplay  RealQuestions={realQuestions} questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null}
           </div>
         );
       }

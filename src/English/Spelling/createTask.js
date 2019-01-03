@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { SpellingTaskModel } from './models'
+import {SpellingTaskModel} from './models'
 
 export default class CreateSpellingTask extends Component {
     state = {
@@ -8,14 +8,14 @@ export default class CreateSpellingTask extends Component {
         lCycleTitle: ''
     }
 
-    onhandleChang = (e)=>{
+    onhandleChange = (e)=>{
         this.setState({
             word: e.target.value
         })
-        
     }
 
-    onAddWord(e){
+    onAddWord=(e)=>{
+
         this.setState({
             words: this.state.words.concat([this.state.word])
         })
@@ -25,21 +25,32 @@ export default class CreateSpellingTask extends Component {
         e.preventDefault()
       }
     
-    onFinishSetTask(){
-        let task = {};
-            task.words = this.state.words,
-            task.Author= 'This current author',
-            task.lcycleId = 'Add this learning cycle'
+    onFinishSetTask =()=>{
+        let task = SpellingTaskModel();
+            task.words = this.state.words;
+            task.Author= 'This current author';
+            task.lcycleId = 'Add this learning cycle';
  
-        //Add the created task to database
+        //Add the created task to database and change status
 
-        // Navigate back to taskList
+        this.props.Status('start', task)
+        
       }
 
     render(){
         return (
             <div>
-
+                <div>
+                    {this.state.words.map(x=> <h1 key={x}>{x}</h1>)}
+                </div>
+                <form onSubmit={this.onAddWord}>
+                    <input className='input is-primary' type='text' placeholder='enter word' onChange={this.onhandleChange}/>
+                    <br/>
+                    <br/>
+                    <button className='button is-warning'type='submit' >Add word</button>
+                </form>
+                <br/>
+                <button className='button is-success' onClick={this.onFinishSetTask}>Finish</button>
             </div>
         )
     }

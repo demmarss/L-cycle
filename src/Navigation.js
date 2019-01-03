@@ -3,9 +3,10 @@ import { Link } from 'react-router-dom';
 import logo from './image/LClogo.png'
 import { connect } from 'react-redux'
 import { logoutUser } from './actions/authUser'
+import { handleReceiveLgroups } from './actions/learningCycle'
 
 class Navigation extends Component{
-
+    
     handleClick = () =>{
         var burger = document.querySelector('.burger')
         var nav = document.querySelector('#'+burger.dataset.target);
@@ -15,10 +16,16 @@ class Navigation extends Component{
         
     }
 
+
+
     render(){
 
         const { authedUser, dispatch } = this.props
-        console.log (authedUser)
+        
+        // const arrayOfTaskId =[...learningCycle.map(x=> x.task)] 
+
+        // console.log('array of task', ...arrayOfTaskId)
+
     return (
         <div className="container">
             <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
@@ -45,11 +52,14 @@ class Navigation extends Component{
                             Progress
                         </Link>
 
-                        <Link to="/myClass" className="navbar-item">
+                        <Link to="/myClass" className="navbar-item" 
+                        
+                        onClick={()=>dispatch(handleReceiveLgroups(authedUser._id))}
+                        >
                             My Class
                         </Link>
 
-                        <Link to="/myTask" className="navbar-item">
+                        <Link to="/myTask" className="navbar-item" onClick={()=>dispatch(handleReceiveLgroups(authedUser._id))}>
                             My Task
                         </Link>
                     </div>
@@ -66,7 +76,7 @@ class Navigation extends Component{
                             </Fragment>
                             :
                             <Fragment>
-                                <p>Hello {authedUser}</p>
+                                <p>Hello {authedUser.username}</p>
                                 <Link to="/myAccount" className="button is-primary">
                                     <strong>MyAccount</strong>
                                 </Link>
@@ -84,11 +94,13 @@ class Navigation extends Component{
 }
 }
 
-function mapStateToProps({ authedUser}) {
+function mapStateToProps({ authedUser, learningCycle}) {
     return {
-      authedUser
+      authedUser, 
+      learningCycle
     };
   }
+  
 
 export default connect(mapStateToProps)(Navigation)
 

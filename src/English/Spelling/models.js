@@ -1,5 +1,4 @@
 
-
 export function SpellingTaskModel () {
     return {
             words: [],

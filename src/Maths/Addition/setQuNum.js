@@ -1,11 +1,23 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleReceiveLgroups } from '../../actions/learningCycle';
+
 
 class SetQuestionNumber extends Component {
 
     state = {
         questionNumber: '',
         level:'level_1',
+        lgroupId: "",
         advanceSetiing: false
+    }
+
+    // Provide the lgroups that the user already have
+    componentDidMount(){
+        const { authedUser, dispatch } = this.props
+        if (authedUser){
+            dispatch(handleReceiveLgroups(authedUser._id))
+        }
     }
 
     handleChange = prop => event => {
@@ -15,9 +27,9 @@ class SetQuestionNumber extends Component {
     handleSubmit = (e)=>{
         
         let questions = this.generateQuestions(Number(this.state.questionNumber))
-        console.log(this.state.level)
-        this.props.Status('start', questions)
-
+        
+        this.props.Status('start', questions,[], this.state.lgroupId)
+                
         this.setState({
             questionNumber: 0
         })
@@ -100,68 +112,93 @@ class SetQuestionNumber extends Component {
       }
 
     render(){
+        const { authedUser, learningCycle, dispatch } = this.props
+
         return (
             <div>
+                {authedUser?
+                
                 <form >
-                    <div className='box has-background-warning'>
-                        <p className=''>Choose the level of difficulty</p>
-                    <br/>
-                        <div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
-                            <label className="radio">
-                                <input type="radio" name='level' value="level_1" defaultChecked/>
-                                Level 1
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name='level' value="level_2"/>
-                                Level 2
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name='level' value="level_3"/>
-                                Level 3
-                            </label>
-                            <label className="radio">
-                                <input type="radio" name='level' value="level_4"/>
-                                Level 4
-                            </label>
-                        </div>
-                        <br/>
-                        <p className='button is-small is-rounded is-danger is-inverted' onClick={this.isAdvanceSetiing}> Advance settings</p>
-                        <br/><br/>
-                        {(this.state.advanceSetiing)?
-                            (<div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
-                                <label className="radio">
-                                    <input type="radio" name='level' value="adding_1"/>
-                                    Adding 1
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" name='level' value="adding_2"/>
-                                    Adding 2
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" name='level' value="adding_5"/>
-                                    Adding 5
-                                </label>
-                                <label className="radio">
-                                    <input type="radio" name='level' value="adding_10"/>
-                                    Adding 10
-                                </label>
-                            </div>): null
-                        }
+                <div className='box has-background-warning'>
+                    <p className=''>Choose the level of difficulty</p>
+                <br/>
+                    <div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
+                        <label className="radio">
+                            <input type="radio" name='level' value="level_1" defaultChecked/>
+                            Level 1
+                        </label>
+                        <label className="radio">
+                            <input type="radio" name='level' value="level_2"/>
+                            Level 2
+                        </label>
+                        <label className="radio">
+                            <input type="radio" name='level' value="level_3"/>
+                            Level 3
+                        </label>
+                        <label className="radio">
+                            <input type="radio" name='level' value="level_4"/>
+                            Level 4
+                        </label>
                     </div>
-                    <input className="input"
-                        type="number" 
-                        placeholder='Enter number of question'
-                        onChange={this.handleChange('questionNumber')}
-                    />
                     <br/>
-                    <br/>
-                    <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
-                </form>
+                    <p className='button is-small is-rounded is-danger is-inverted' onClick={this.isAdvanceSetiing}> Advance settings</p>
+                    <br/><br/>
+                    {(this.state.advanceSetiing)?
+                        (<div className="control has-text-centered" onChange={this.handleChange('level')} value={this.state.level}>
+                            <label className="radio">
+                                <input type="radio" name='level' value="adding_1"/>
+                                Adding 1
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name='level' value="adding_2"/>
+                                Adding 2
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name='level' value="adding_5"/>
+                                Adding 5
+                            </label>
+                            <label className="radio">
+                                <input type="radio" name='level' value="adding_10"/>
+                                Adding 10
+                            </label>
+                        </div>): null
+                    }
+                </div>
+                <input className="input"
+                    type="number" 
+                    placeholder='Enter number of question'
+                    onChange={this.handleChange('questionNumber')}
+                />
+                <br/>
+                <div className="control">
+                    <div className="select">
+                        <select onChange={this.handleChange('lgroupId')}>
+                        <option>Select learning group</option>
+                        {learningCycle.map(x=>
+                          <option value={x._id}>{x.lgtitle}</option>
+                        )}
+                        
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
+            </form>
+            :
+             <p>Please log in to set question </p>   }
+                
             </div>
         )
     }
 
 }
 
-export default SetQuestionNumber
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser,
+      learningCycle
+    };
+  }
+
+export default connect(mapStateToProps)(SetQuestionNumber)
 

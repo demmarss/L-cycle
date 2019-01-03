@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import logo from '../image/LClogo.png'
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { setAuthedUser } from '../actions/authUser'
+import { setAuthedUser, handleSetAuthedUser } from '../actions/authUser'
 
 class LogIn extends Component {
 
@@ -22,10 +22,14 @@ class LogIn extends Component {
       handleSubmit = e => {
         e.preventDefault();
         
-        const { username } = this.state;
+        const { username, password } = this.state;
         const { dispatch } = this.props;
+
+        dispatch(handleSetAuthedUser(username, password));
     
-        dispatch(setAuthedUser(username));
+        // dispatch(setAuthedUser(username))
+
+
     
         this.setState(currentState => ({
           toHome: currentState.username ? true : false
@@ -61,7 +65,10 @@ class LogIn extends Component {
 
                         <div className="field">
                             <div className="control">
-                                <input className="input" value={this.state.password} type="password" placeholder="Your Password" onChange={this.handleChange('password')}/>
+                                <input className="input" 
+                                value={this.state.password} 
+                                type="password" placeholder="Your Password" 
+                                onChange={this.handleChange('password')}/>
                             </div>
                         </div>
                         <div className="field">

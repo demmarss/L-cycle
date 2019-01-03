@@ -1,29 +1,37 @@
 import React, {Component} from 'react'
 import SetQuestionNumber from './setQuNum'
 import QuestionDisplay from './displayQu'
+import { connect } from 'react-redux'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
+import {handleCreateTask} from '../../actions/tasks'
 
-export default class Addition extends Component {
+class Addition extends Component {
     state = {
         status: "",
         questions: [],
-        answeredQuestions:[]
+        answeredQuestions:[],
+        lgroupId: ""
       }
 
-    setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions) => {
+    setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions, lgroupId="") => {
+        
         this.setState({
             status: passedstatus,
             questions: questions,
-            answeredQuestions: answeredQuestions
+            answeredQuestions: answeredQuestions,
+            lgroupId: lgroupId
         })
-    }
+        
+        const { dispatch, authedUser } = this.props;
+        let task = {
+                    topic: 'Addition',
+                    user: authedUser._id,
+                    questions: questions,
+                    scoreHistory: []
+                    }
 
-    setQuestions = (q) => {
-
-        this.setState({
-            questions: this.state.questions.concat(q)
-        })
+        dispatch(handleCreateTask(task, lgroupId))
     }
 
     generateResult = () =>{
@@ -49,3 +57,10 @@ export default class Addition extends Component {
       }
 
 }
+function mapStateToProps({ authedUser, learningCycle}) {
+  return {
+    authedUser,
+    learningCycle
+  };
+}
+export default connect(mapStateToProps)(Addition)

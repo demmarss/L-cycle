@@ -1,21 +1,20 @@
-import { GET_LCYCLE, DELETE_LCYCLE, CREATE_LCYCLE} from "../actions/learningCycle";
+import { GET_GROUP, DELETE_LCYCLE, CREATE_LCYCLE, RECEIVE_LGROUPS} from "../actions/learningCycle";
 
-export default function learningCycle(state = {}, action) {
+
+export default function learningCycle(state = [], action) {
   switch (action.type) {
-    case GET_LCYCLE:
+    case RECEIVE_LGROUPS:
+      return action.lgroups 
+    case GET_GROUP:
       return {
         ...state,
         ...action.lCycleId
       }
-
     case DELETE_LCYCLE:
       return action.lCycleId;
 
     case CREATE_LCYCLE:
-      return {
-        ...action.userId, 
-        ...action.lCycleTitle
-      };
+      return [...state, action.lgroup ]
     default:
       return state;
   }

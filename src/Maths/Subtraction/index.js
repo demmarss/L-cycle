@@ -3,20 +3,35 @@ import SetQuestionNumber from './setQuNum'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
+import {handleCreateTask} from '../../actions/tasks'
+import { connect } from 'react-redux'
 
-export default class Subtraction extends Component {
+class Subtraction extends Component {
     state = {
         status: "",
         questions: [],
-        answeredQuestions:[]
+        answeredQuestions:[],
+        lgroupId: ""
       }
 
-    setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions) => {
+      setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions, lgroupId="") => {
         this.setState({
             status: passedstatus,
             questions: questions,
-            answeredQuestions: answeredQuestions
+            answeredQuestions: answeredQuestions,
+            lgroupId: lgroupId
         })
+
+     
+        const { dispatch, authedUser } = this.props;
+        let task = {
+                    topic: 'Subtraction',
+                    user: authedUser._id,
+                    questions: questions,
+                    scoreHistory: []
+                    }
+
+        dispatch(handleCreateTask(task, lgroupId))
     }
 
     setQuestions = (q) => {
@@ -32,8 +47,6 @@ export default class Subtraction extends Component {
 
         let result = correct* 100/this.state.answeredQuestions.length
 
-
-
         return result + '%'
     }
 
@@ -41,7 +54,7 @@ export default class Subtraction extends Component {
         const {questions, answeredQuestions} = this.state;
         return (
           <div className="App">
-            <h1 class='title'>Substraction</h1>
+            <h1 className='title'>Substraction</h1>
             <br/>
             {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
@@ -52,3 +65,11 @@ export default class Subtraction extends Component {
       }
 
 }
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser,
+      learningCycle
+    };
+  }
+
+export default connect(mapStateToProps)(Subtraction)

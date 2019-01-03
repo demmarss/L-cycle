@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { handleReceiveLgroups } from '../../actions/learningCycle';
 
 class SetQuestionNumber extends Component {
 
     state = {
         questionNumber: '',
         level:'level_1',
+        lgroupId: "",
         advanceSetiing: false
     }
+
+    // Provide the lgroups that the user already have
+    componentDidMount(){
+        const { authedUser, dispatch } = this.props
+        if (authedUser){
+            dispatch(handleReceiveLgroups(authedUser._id))
+        }
+    }
+
 
     handleChange = prop => event => {
         this.setState({ [prop]: event.target.value });
@@ -16,7 +28,7 @@ class SetQuestionNumber extends Component {
         
         let questions = this.generateQuestions(Number(this.state.questionNumber))
         console.log(this.state.level)
-        this.props.Status('start', questions)
+        this.props.Status('start', questions,[], this.state.lgroupId)
 
         this.setState({
             questionNumber: 0
@@ -128,8 +140,11 @@ class SetQuestionNumber extends Component {
       }
 
     render(){
+        const { authedUser, learningCycle, dispatch } = this.props
+
         return (
             <div>
+                {authedUser?
                 <form >
                     <div className='box has-background-warning'>
                         <p className=''>Choose the level of difficulty</p>
@@ -210,14 +225,35 @@ class SetQuestionNumber extends Component {
                         onChange={this.handleChange('questionNumber')}
                     />
                     <br/>
-                    <br/>
-                    <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
-                </form>
+                    <div className="control">
+                    <div className="select">
+                        <select onChange={this.handleChange('lgroupId')}>
+                        <option>Select learning group</option>
+                        {learningCycle.map(x=>
+                          <option value={x._id}>{x.lgtitle}</option>
+                        )}
+                        
+                        </select>
+                    </div>
+                </div>
+                <br/>
+                <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
+            </form>
+            :
+             <p>Please log in to set question </p>   }
             </div>
         )
     }
 
 }
 
-export default SetQuestionNumber
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser,
+      learningCycle
+    };
+  }
+
+export default connect(mapStateToProps)(SetQuestionNumber)
+
 

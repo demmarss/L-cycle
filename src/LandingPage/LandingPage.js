@@ -32,7 +32,6 @@ class LandingPage extends Component {
 
     return (
         <div>
-          V1 Landing Page view
           <br/>
           <div className="tabs is-centered">
             <ul>  

@@ -10,7 +10,7 @@ import MyAccount from './user/UserAcctDetail';
 import ForgotPassword from './user/ForgotPassword'
 import Question from './Question/Question'
 import Task from './Task/Task'
-import Subtraction from './Maths/Subtraction/subtraction'
+import Subtraction from './Maths/Subtraction'
 import Addition from './Maths/Addition'
 import Multiplication from './Maths/Multiplication'
 import Division from './Maths/Division'
@@ -18,6 +18,7 @@ import { connect } from 'react-redux'
 // import handleInitialData from './actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
+import Spelling from './English/Spelling';
 
 class App extends Component {
 
@@ -49,6 +50,7 @@ class App extends Component {
               <Route exact path='/addition' component = {Addition}/>
               <Route exact path='/multiplication' component = {Multiplication}/>
               <Route exact path='/division' component = {Division}/>
+              <Route exact path='/spelling' component = {Spelling}/>
           </div>
         </div>
 
