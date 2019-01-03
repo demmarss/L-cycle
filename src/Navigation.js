@@ -4,6 +4,7 @@ import logo from './image/LClogo.png'
 import { connect } from 'react-redux'
 import { logoutUser } from './actions/authUser'
 import { handleReceiveLgroups } from './actions/learningCycle'
+import { handleReceiveTasks } from './actions/tasks'
 
 class Navigation extends Component{
     
@@ -22,10 +23,6 @@ class Navigation extends Component{
 
         const { authedUser, dispatch } = this.props
         
-        // const arrayOfTaskId =[...learningCycle.map(x=> x.task)] 
-
-        // console.log('array of task', ...arrayOfTaskId)
-
     return (
         <div className="container">
             <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
@@ -59,7 +56,7 @@ class Navigation extends Component{
                             My Class
                         </Link>
 
-                        <Link to="/myTask" className="navbar-item" onClick={()=>dispatch(handleReceiveLgroups(authedUser._id))}>
+                        <Link to="/myTask" className="navbar-item" onClick={()=>dispatch(handleReceiveTasks(authedUser._id))}>
                             My Task
                         </Link>
                     </div>

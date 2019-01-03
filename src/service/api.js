@@ -58,7 +58,6 @@ export async function gettingLgroup(lgroupId) {
 export async function receivingLgroups({userId, token}) {
     axios.defaults.headers['x-auth-token'] = token
     const response = await axios.get(`/lgroups/${userId}`);
-        console.log('From Api:', response.data)
        return response.data; // this should be array of learning groups that the user belong
  }
 

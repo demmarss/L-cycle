@@ -44,7 +44,7 @@ export function deletetask(taskId) {
       task,
       token,
       lgroupId
-    })
+       })
       .then
         (task => dispatch(addTask({task})), 
         (lgroups => dispatch(receiveLgroups({lgroups}))))
@@ -56,13 +56,14 @@ export function deletetask(taskId) {
     return (dispatch, getState) => {
       const { authedUser } = getState();
       const { token} = authedUser? authedUser:{token:""}
+ 
     return receivingTasks({
       userId,
       token
-    })
+      })
     // calling action through dispatch and assigning it to username
       .then((tasks) => dispatch(receiveTasks(tasks)));
-  };
+   };
   }
 
 export function handleGetTask(taskId) {
