@@ -1,15 +1,19 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
+import { connect } from 'react-redux'
 
 class Task extends Component {
     
     render(){
-        const {task, handleDelete } = this.props
+        const {task, handleDelete, authedUser } = this.props
 
         return (           
-                <div className="box">  
-                    <div className='notification is-info'>
-                    <button className="delete" onClick={()=>handleDelete(task._id)}/>
+                <div className="box" >  
+                    <div className='notification is-info' key={task._id}>
+                        {authedUser._id === task.user? 
+                        <button className="delete" onClick={()=>handleDelete(task._id)}/>:
+                        null
+                        }
                         <h2 className="title is-4">{task.topic}</h2>  
                         <p>{task.questions.length} questions</p>
                         <p>{task.scoreHistory.length} attempts</p>
@@ -24,8 +28,12 @@ class Task extends Component {
         )
     }
 }
-
-export default Task
+function mapStateToProps({authedUser}){
+    return {
+        authedUser
+    }
+}
+export default connect(mapStateToProps)(Task)
 
 
 

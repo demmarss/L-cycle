@@ -28,6 +28,7 @@ class QuestionDisplay extends Component {
         return taskyyy
     }
 
+
     handleChange = (e) =>{
 
         this.setState({
@@ -52,7 +53,6 @@ class QuestionDisplay extends Component {
         e.preventDefault()
     }
     
-
     handleFinish = (e) =>{
 
         const {dispatch } = this.props
@@ -65,7 +65,7 @@ class QuestionDisplay extends Component {
              }
         const timeDuration = this.getTimeDuration()
       
-        dispatch(handleAddScoreHistory(tasky._id, timeDuration, correctedQuestionArray ))
+        // dispatch(handleAddScoreHistory(tasky._id, timeDuration, correctedQuestionArray ))
 
         this.setState({
             displayResult: false,
@@ -75,7 +75,7 @@ class QuestionDisplay extends Component {
 
         e.preventDefault()
     }
-    
+
     getTimeDuration = () => {
         let duration = this.state.endTime - this.state.startTime
         return this.secondsToHms(Math.floor(duration/1000))
@@ -93,6 +93,7 @@ class QuestionDisplay extends Component {
         var sDisplay = s > 0 ? s + (s === 1 ? " s" : " s") : "";
         return hDisplay + mDisplay + sDisplay; 
     }
+
     render (){
         const tasky = this.getTask(this.props.match.params.taskId)
         const {authedUser}= this.props
@@ -100,32 +101,33 @@ class QuestionDisplay extends Component {
         return (
             <div>
                 {authedUser?
-                    <div>
+                <div>
                     <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />
-                    {(this.state.counter < tasky.questions.length)? 
-                        (<form onSubmit={this.handleSubmit}>
-                            <article className="message is-link">
-                                <div className="message-header">
-                                    <p>Time spent : {this.getTimeDuration()}</p>          
-                                </div>
-                                <div className="message-body has-text-right title">
-                                    <h1>{tasky.questions[this.state.counter].number1}</h1>
-                                    <h1> - {tasky.questions[this.state.counter].number2} </h1>
-                                    <input className="input title" type="number" placeholder="=" onInput={this.handleChange}/>
-                                    <br/>
-                                </div>
-                            </article>
-                            <div className="field">
-                                <p className="control">
-                                    <button type='submit' className="button is-success is-fullwidth" disabled={this.state.submit}>Submit</button>
-                                </p>
-                            </div> 
-                        </form>)
-                        :<p className="button is-success " onClick={this.handleFinish}>Click to see result</p>
-                    }
-                    {!this.state.displayResult? <DisplayResult task={this.state.task} correctArray={this.state.correctedQuestionArray} />: null }
-                    </div>
+                {(this.state.counter < tasky.questions.length)? 
+                    (<form onSubmit={this.handleSubmit}>
+                        <article className="message is-link">
+                            <div className="message-header">
+                                <p>Time spent : {this.getTimeDuration()}</p>          
+                            </div>
+                            <div className="message-body has-text-right title">
+                                <h1>{tasky.questions[this.state.counter].number1}</h1>
+                                <h1> - {tasky.questions[this.state.counter].number2} </h1>
+                                <input className="input title" type="number" placeholder="=" onInput={this.handleChange}/>
+                                <br/>
+                            </div>
+                        </article>
+                        <div className="field">
+                            <p className="control">
+                                <button type='submit' className="button is-success is-fullwidth" disabled={this.state.submit}>Submit</button>
+                            </p>
+                        </div> 
+                    </form>)
+                    :<p className="button is-success " onClick={this.handleFinish}>Click to see result</p>
+                }
+                {!this.state.displayResult? <DisplayResult task={this.state.task} correctArray={this.state.correctedQuestionArray} />: null }
+                </div>
                 :<p>Login or Registration required</p>}
+                
             </div>
         )    
     }
@@ -142,3 +144,4 @@ function mapStateToProps({authedUser, depatch, learningCycle, task}){
 }
 
 export default connect(mapStateToProps)(QuestionDisplay)
+

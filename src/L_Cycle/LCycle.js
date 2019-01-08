@@ -1,15 +1,20 @@
 import React, {Component} from 'react'
-import {Link} from 'react-router-dom'
+import {Link} from 'react-router-dom';
+import { connect } from 'react-redux'
 
 class LCycle extends Component {
     
     render(){
-        const {lgroup, handleDelete } = this.props
+        const {lgroup, handleDelete, authedUser } = this.props
 
         return (
             <div className="box">
                 <div className="notification is-info">
-                    <button className="delete" onClick={()=>handleDelete(lgroup._id)}/>
+                        {authedUser._id === lgroup.authorId? 
+                        <button className="delete" onClick={()=>handleDelete(lgroup._id)}/>:
+                        null
+                        }
+                        
                         <h2 className="title is-4">{lgroup.lgtitle}</h2>   
                             <p> 
                                 Code: {lgroup.code}
@@ -22,5 +27,11 @@ class LCycle extends Component {
         )
     }
 }
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser
+    };
+  }
+  
 
-export default LCycle
+export default connect(mapStateToProps)(LCycle)

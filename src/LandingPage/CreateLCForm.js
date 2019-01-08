@@ -14,14 +14,8 @@ class CreateLCForm extends Component {
         this.setState({ [prop]: event.target.value });
       };
 
-
-    
       handleSubmit = e => {
-          
         e.preventDefault();
-
-        
-        
         const { lgtitle } = this.state;
         const { dispatch } = this.props;
     
@@ -33,12 +27,9 @@ class CreateLCForm extends Component {
 
       };
 
-    //   isEmpty() {
-    //     return this.state.username === "" && this.state.password === "";
-    //   }
-
-
-
+      isEmpty() {
+        return this.state.lgtitle === "";
+      }
 
     render (){
         if (this.state.toHome === true) {
@@ -62,7 +53,7 @@ class CreateLCForm extends Component {
                             </div>
                             <div className="field">
                                 <p className="control">
-                                    <button type='submit' className="button is-warning">
+                                    <button type='submit' className="button is-warning" disabled={this.isEmpty()}>
                                     Click to Create
                                     </button>
                                 </p>

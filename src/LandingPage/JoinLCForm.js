@@ -30,10 +30,9 @@ class JoinLCForm extends Component {
 
       };
 
-    //   isEmpty() {
-    //     return this.state.username === "" && this.state.password === "";
-    //   }
-    
+      isEmpty() {
+        return this.state.lgCode === "";
+      }
     render (){
         const { authedUser } = this.props
         return (
@@ -51,7 +50,7 @@ class JoinLCForm extends Component {
                             </div>
                             <div className="field">
                                 <p className="control">
-                                    <button type="submit" className="button is-success">
+                                    <button type="submit" className="button is-success" disabled={this.isEmpty()}>
                                     Click to Join
                                     </button>
                                 </p>

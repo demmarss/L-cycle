@@ -9,10 +9,10 @@ class TaskList extends Component {
 
     handleDelete = (taskId) =>{
 
-        console.log('I trigger id', taskId)
-
         const { dispatch } = this.props
 
+        console.log('I trigger id', taskId)
+        
         dispatch(handleDeleteTask(taskId))
     }
 
@@ -32,7 +32,7 @@ class TaskList extends Component {
                         
                     </div>:
                     task.map(task=> 
-                        <Task handleDelete={this.handleDelete} task={task} key={task._id}/>            
+                        <Task handleDelete={this.handleDelete} task={task} />            
                     ) :
                     <p className="box has-background-success has-text-warning">Please login or signup</p>}
             </div>
