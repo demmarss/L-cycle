@@ -8,7 +8,8 @@ class SetQuestionNumber extends Component {
         questionNumber: '',
         level:'level_1',
         lgroupId: "",
-        advanceSetiing: false
+        advanceSetiing: false,
+        notification: false
     }
 
     // Provide the lgroups that the user already have
@@ -25,10 +26,16 @@ class SetQuestionNumber extends Component {
       };
 
     handleSubmit = (e)=>{
+        //To show notificaiton if lgroup is not changed
+        if (this.state.lgroupId === ""){
+            return this.setState({
+                notification: true
+            })
+        }
         
         let questions = this.generateQuestions(Number(this.state.questionNumber))
         console.log(this.state.level)
-        this.props.Status('start', questions,[], this.state.lgroupId)
+        this.props.Status('submit', questions,[], this.state.lgroupId)
 
         this.setState({
             questionNumber: 0
@@ -225,17 +232,22 @@ class SetQuestionNumber extends Component {
                         onChange={this.handleChange('questionNumber')}
                     />
                     <br/>
-                    <div className="control">
-                    <div className="select">
-                        <select onChange={this.handleChange('lgroupId')}>
-                        <option>Select learning group</option>
-                        {learningCycle.map(x=>
-                          <option value={x._id} key={x._id}>{x.lgtitle}</option>
-                        )}
-                        
-                        </select>
+                    <br/>
+                    <div className="notification is-danger" hidden={!this.state.notification}>
+                        <button className="delete"></button>
+                        Please select  <strong>learning group</strong>
                     </div>
-                </div>
+                    <div className="control">
+                        <div className="select">
+                            <select onChange={this.handleChange('lgroupId')}>
+                            <option>Select learning group</option>
+                            {learningCycle.map(x=>
+                            <option value={x._id} key={x._id}>{x.lgtitle}</option>
+                            )}
+                            
+                            </select>
+                        </div>
+                    </div>
                 <br/>
                 <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
             </form>

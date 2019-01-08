@@ -8,7 +8,8 @@ class SetQuestionNumber extends Component {
         questionNumber: '',
         level:'level_1',
         lgroupId: "",
-        advanceSetiing: false
+        advanceSetiing: false,
+        notification: false
     }
 
         // Provide the lgroups that the user already have
@@ -25,10 +26,16 @@ class SetQuestionNumber extends Component {
       };
 
     handleSubmit = (e)=>{
+        //To show notificaiton if lgroup is not changed
+        if (this.state.lgroupId === ""){
+            return this.setState({
+                notification: true
+            })
+        }
         
         let questions = this.generateQuestions(Number(this.state.questionNumber))
         console.log(this.state.level)
-        this.props.Status('start', questions,[], this.state.lgroupId)
+        this.props.Status('submit', questions,[], this.state.lgroupId)
 
         this.setState({
             questionNumber: 0
@@ -51,20 +58,20 @@ class SetQuestionNumber extends Component {
 
         switch (this.state.level){
             case 'level_1':
-                x = Math.floor(Math.random() * 10)
                 y = Math.floor(Math.random() * 10)+1
+                x = Math.floor(Math.random() * 5) * y
                 break
             case 'level_2':
-                x = Math.floor(Math.random() * 100)
-                y = Math.floor(Math.random() * 10)+1
+                y = Math.floor(Math.random() * 10)+1    
+                x = Math.floor(Math.random() * 10) * y
                 break
             case 'level_3':
-                x = Math.floor(Math.random() * 1000)
-                y = Math.floor(Math.random() * 10)+1
+                y = Math.floor(Math.random() * 10)+6    
+                x = Math.floor(Math.random() * 100) * y
                 break
             case 'level_4':
-                x = Math.floor(Math.random() * 10000)
-                y = Math.floor(Math.random() * 100)+1
+                y = Math.floor(Math.random() * 10)+10    
+                x = Math.floor(Math.random() * 100) * y
                 break
             case 'dividing_2':
                 x = Math.floor(Math.random() * 12) * 2
@@ -225,6 +232,11 @@ class SetQuestionNumber extends Component {
                         onChange={this.handleChange('questionNumber')}
                     />
                     <br/>
+                    <br/>
+                    <div className="notification is-danger" hidden={!this.state.notification}>
+                        <button className="delete"></button>
+                    Please select  <strong>learning group</strong>
+                    </div>
                 <div className="control">
                     <div className="select">
                         <select onChange={this.handleChange('lgroupId')}>
@@ -232,7 +244,6 @@ class SetQuestionNumber extends Component {
                         {learningCycle.map(x=>
                           <option value={x._id} key={x._id}>{x.lgtitle}</option>
                         )}
-                        
                         </select>
                     </div>
                 </div>

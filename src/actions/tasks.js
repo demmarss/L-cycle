@@ -1,10 +1,11 @@
-import { createTask, gettingTask, receivingTasks } from '../service/api'
-import { receiveLgroups } from './learningCycle'
+import { createTask, gettingTask, receivingTasks, addingScoreHistoryToTasks, deletingTask } from '../service/api'
+import { receiveLgroups, deleteTaskInLgroup } from './learningCycle'
 
 export const GET_TASK = "GET_TASK";
 export const CREATE_TASK = "CREATE_TASK";
 export const DELETE_TASK = "DELETE_TASK";
 export const RECEIVE_TASKS = "RECEIVE_TASKS";
+export const ADD_SCORE_HISTORY ="ADD_SCORE_HISTORY"
 
 export function getTask(taskId) {
   return {
@@ -27,15 +28,38 @@ export function receiveTasks(tasks) {
       tasks
     };
   }
-export function deletetask(taskId) {
+
+
+export function addScoreHistory(tasks) {
+    return {
+      type: ADD_SCORE_HISTORY,
+      tasks
+    };
+  }
+export function deleteTask(task) {
     return {
       type: DELETE_TASK,
-      taskId
+      task
     };
   }
 
-
-
+// handler for deleting a learning group
+export function handleDeleteTask(taskId){
+  
+  return (dispatch, getState)=>{
+    const { authedUser }= getState();
+    const { token } = authedUser? authedUser:{todken:""}
+    return deletingTask({
+      taskId,
+      token
+    })
+    .then((task)=> { 
+      dispatch(deleteTask(task))
+      dispatch(deleteTaskInLgroup(task))
+      }) // this is the deleted task
+  }
+}
+// handler for creating task
   export function handleCreateTask(task, lgroupId) {
     return (dispatch, getState) => {
       const { authedUser } = getState();
@@ -45,10 +69,11 @@ export function deletetask(taskId) {
       token,
       lgroupId
        })
-      .then
-        (task => dispatch(addTask({task})), 
-        (lgroups => dispatch(receiveLgroups({lgroups}))))
-    };
+      .then(({task, lgroups}) => {
+        dispatch(addTask(task));
+        dispatch(receiveLgroups(lgroups))
+      })
+    }
   }
 
   // Receive Tasks list of a user
@@ -66,6 +91,23 @@ export function deletetask(taskId) {
    };
   }
 
+    // Receive Tasks list of a user
+    export function handleAddScoreHistory(taskyId, timeDuration, correctedQuestionArray){
+      return (dispatch, getState) => {
+        const { authedUser } = getState();
+        const { token } = authedUser? authedUser:{token:""}
+   
+      return addingScoreHistoryToTasks({
+        taskyId,
+        timeDuration,
+        correctedQuestionArray,
+        token
+        })
+      // calling action through dispatch and assigning it to username
+        .then((tasks) => dispatch(addScoreHistory(tasks)));
+     };
+    }
+  
 export function handleGetTask(taskId) {
     return (dispatch) => {
           
@@ -75,3 +117,4 @@ export function handleGetTask(taskId) {
         .then(({taskId}) => dispatch(getTask(taskId)));
     };
   }
+

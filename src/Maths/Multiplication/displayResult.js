@@ -1,28 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
 
-function ResultDisplay(props){
+export default class DisplayResult extends Component {
+    
+    
+    render (){
+        const { task, correctArray } = this.props
+        const Result = correctArray.length *100/task.questions.length
+        return (
 
-    function handleTryAgain(){
-        props.Status('start', props.questions, [])
+            <div>
+                <h1>Your result is: {parseInt(Result)} %</h1>
+                
+                <p className="button is-success">Try Again</p>
+    
+                <p className="button is-primary">Review</p>
+    
+            </div>
+        )
     }
-
-    function handleReview(){
-        props.Status('review')
-    }
-
-
-    return (
-
-        <div>
-            <h1>Your result is: {props.Result}</h1>
-            
-            <p className="button is-success" onClick={handleTryAgain}>Try Again</p>
-
-            <p className="button is-primary" onClick={handleReview}>Review</p>
-
-        </div>
-    )
-
+    
 }
-
-export default ResultDisplay

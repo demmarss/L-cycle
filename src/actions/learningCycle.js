@@ -1,10 +1,11 @@
-import { createLgroup, receivingLgroups, joinLgroup, gettingLgroup } from '../service/api'
+import { createLgroup, receivingLgroups, joinLgroup, gettingLgroup, deletingLgroup } from '../service/api'
 
 export const GET_GROUP = "GET_GROUP";
 export const RECEIVE_LGROUPS = "RECEIVE_LGROUPS";
 export const CREATE_LCYCLE = "CREATE_LCYCLE";
 export const DELETE_LCYCLE = "DELETE_LCYCLE";
-export const UPDATE_LGROUPS = 'UPDATE_LGROUPS'
+export const UPDATE_LGROUPS = 'UPDATE_LGROUPS';
+export const DELETE_TASK_FROM_LCYCLE = 'DELETE_TASK_FROM_LCYCLE'
 
 export function getLGroup(lgroupId) {
   return {
@@ -28,19 +29,34 @@ export function addLGroup(lgroup) {
   };
 }
 
-export function deleteLCycle(lCycleTitle) {
+export function deleteLCycle(lgroupId) {
     return {
       type: DELETE_LCYCLE,
-      lCycleTitle
+      lgroupId
     };
   }
 
-  export function updateLgroups(lgroup) {
-    return {
-      type: UPDATE_LGROUPS,
-      lgroup
-    };
+  export function deleteTaskInLgroup(task){
+    return{
+      type: DELETE_TASK_FROM_LCYCLE,
+      task
+    }
   }
+
+// handler for deleting a learning group
+export function handleDeleteLgroup(lgroupId){
+  console.log('', lgroupId)
+
+  return (dispatch, getState)=>{
+    const { authedUser }= getState();
+    const { token } = authedUser? authedUser:{todken:""}
+    return deletingLgroup({
+      lgroupId,
+      token
+    })
+    .then((lgroupId)=> dispatch(deleteLCycle(lgroupId)))
+  }
+}
 
 
 
@@ -54,7 +70,7 @@ export function handleCreateLgroup(lgtitle) {
       token
     })
     // calling action through dispatch and assigning it to username
-      .then((lgroup) => dispatch(addLGroup(lgroup)));
+      .then((lgroups) => dispatch(addLGroup(lgroups)));
   };
 }
 

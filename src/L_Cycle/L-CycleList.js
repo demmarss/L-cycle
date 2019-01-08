@@ -1,30 +1,37 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import {Link} from 'react-router-dom'
+import LCycle from './LCycle'
+import { handleDeleteLgroup } from '../actions/learningCycle'
 
 
 class TaskList extends Component {
+
+
+    handleDelete=(lgroupId)=>{
+
+        const { dispatch } = this.props
+
+        dispatch(handleDeleteLgroup(lgroupId))
+    }
+
+
     render(){
 
-        const { authedUser, learningCycle, dispatch } = this.props
+        const { authedUser, learningCycle } = this.props
 
         return (
             <div>
 
-                    {authedUser?   
-                        learningCycle.map(x =>
-                            <Link to='/subtraction' key={x._id}>
-                                <div className="box">
-                                    <h2 className="title is-4">{x.lgtitle}</h2>   
-                                    <p> {x.task.length} tasks
-                                        <br/>
-                                        {x.members.length} members
-                                        <br/>
-                                        Code: {x.code}
-                                    </p>
-                                </div>
-                            </Link>             
-                    ): 
+                    {authedUser?
+                        learningCycle.length ===0 ?  
+                        <div className="notification is-warning">
+                            <p>No learning group or class found </p>
+                            <br></br>
+                            <button className='button'>Click to create learning group </button>
+                        </div>: 
+                        learningCycle.map(lgroup =>
+                            <LCycle handleDelete={this.handleDelete} lgroup={lgroup} key={lgroup._id}/>            
+                        ): 
                     <p className="box has-background-primary has-text-warning">LogIn or SignUp to VIEW learning group </p>
                 
                 }

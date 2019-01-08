@@ -74,7 +74,6 @@ Task ={
   topic:
   author (Ademola):
   questions [Array of objs{}]:
-  
   scoreHistory: [{userId: Score, correct: [questionIndex]] 
 }
 

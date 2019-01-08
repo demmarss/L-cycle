@@ -26,6 +26,21 @@ export async function createTask({task, token, lgroupId}) {
     return response.data;
  }
 
+ // To delete Lgroup
+ export async function deletingLgroup({lgroupId, token}){
+     axios.defaults.headers['x-auth-token']= token
+     const response = await axios.delete(`/lgroups/${lgroupId}`)
+     return response.data;
+ }
+
+ // To delete task
+ export async function deletingTask({taskId, token}){
+    axios.defaults.headers['x-auth-token']= token
+    const response = await axios.delete(`/tasks/${taskId}`)
+    return response.data; // this receives the deleted task
+}
+
+
 export async function gettingTask(taskId) {
     const response = await axios.get(`${apiUrl}/tasks`, taskId);
        return response.data;
@@ -69,6 +84,12 @@ export async function receivingLgroups({userId, token}) {
        return response.data; // this should be array of tasks from the classes that user belong
  }
 
+ // To update task with answer from a specific user
+ export async function addingScoreHistoryToTasks({taskyId, timeDuration, correctedQuestionArray, token}){
+    axios.defaults.headers['x-auth-token'] = token
+    const response = await axios.put(`/tasks/${taskyId}`, {taskyId, timeDuration, correctedQuestionArray})
+    return response.data
+ }
  // To login User
 export async function loginUser(user) {
     const response = await axios.post(`/auth`, user);

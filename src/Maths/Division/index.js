@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import SetQuestionNumber from './setQuNum'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
+import TaskCreated from '../../taskCreatedMessage'
 import ReviewDisplay from './displayReview'
 import {handleCreateTask} from '../../actions/tasks'
 import { connect } from 'react-redux'
@@ -56,6 +57,7 @@ class Division extends Component {
             <h1 className='title'>Division</h1>
             <br/>
             {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
+            {(this.state.status === 'submit')? <TaskCreated qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
             {(this.state.status === 'finish')? <ResultDisplay questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
             {(this.state.status ==='review')? <ReviewDisplay questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null}

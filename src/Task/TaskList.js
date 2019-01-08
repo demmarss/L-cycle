@@ -1,32 +1,40 @@
-import React, {Component} from 'react'
+import React, {Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import {handleDeleteTask} from '../actions/tasks'
+import Task from './Task'
 
 
 class TaskList extends Component {
+
+    handleDelete = (taskId) =>{
+
+        console.log('I trigger id', taskId)
+
+        const { dispatch } = this.props
+
+        dispatch(handleDeleteTask(taskId))
+    }
+
+
     render(){
-        const { authedUser, learningCycle, task,  dispatch } = this.props
+        const { authedUser, task } = this.props
         return (
             <div>
-                <h1 className="title is-4">V3 Tasks List</h1>
-
                 {authedUser?
-                task.map(task=>   
-                <Link to ='/task' key={task._id}>
-                    <div className="card">  
-                        <header className="card-header">    
-                            <h2 className="title is-4">{task.topic}</h2>  
-                        </header>
-                        <div className="card-content">    
-                            <p>{task.questions.length} questions</p>
-                            <p>{task.scoreHistory.length} attempts</p>
-                        </div>
-                    </div> 
-                    <br/>
-                </Link> 
-                ) :
-                <p>Please login or signup</p>}
-
+                    task.length ===0 ?  
+                    <div className="notification is-warning">
+                        <p>No learning task found </p>
+                        <br></br>
+                        <Link to={'/creatTaskLandingPg'}>
+                            <button className='button'>Click to create task</button>
+                        </Link>
+                        
+                    </div>:
+                    task.map(task=> 
+                        <Task handleDelete={this.handleDelete} task={task} key={task._id}/>            
+                    ) :
+                    <p className="box has-background-success has-text-warning">Please login or signup</p>}
             </div>
         )
     }
