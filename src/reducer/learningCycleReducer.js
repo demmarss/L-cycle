@@ -15,7 +15,7 @@ export default function learningCycle(state = [], action) {
       return state.filter(({ _id }) => _id !== action.lgroupId)
 
     case DELETE_TASK_FROM_LCYCLE:
-      return state.map(group=> group.task.filter(taskId => taskId !== action.task._id))
+      return [...state].map(group=> group.task.filter(taskId => taskId !== action.task._id))
     
     case CREATE_LCYCLE:
       return [...state, action.lgroup ]

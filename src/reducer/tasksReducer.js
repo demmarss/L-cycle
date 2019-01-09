@@ -5,7 +5,8 @@ export default function task(state = [], action) {
     case RECEIVE_TASKS:
       return action.tasks.filter(x => x) 
     case ADD_SCORE_HISTORY:
-      return action.tasks 
+      return action.tasks
+       
     case GET_TASK:
       return {
         ...state,

@@ -94,7 +94,6 @@ export async function receivingLgroups({userId, token}) {
 export async function loginUser(user) {
     const response = await axios.post(`/auth`, user);
        const token = response.data
-       console.log('Wish to see this:', decodeToken(token))
        const { username, _id } = decodeToken(token)
        return {username, _id, token} 
  }

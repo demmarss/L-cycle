@@ -45,7 +45,7 @@ class Navigation extends Component{
                             Home
                         </Link>
 
-                        <Link to="/myResult" className="navbar-item">
+                        <Link to="/myProgress" className="navbar-item" onClick={()=>dispatch(handleReceiveTasks(authedUser._id))}>
                             Progress
                         </Link>
 

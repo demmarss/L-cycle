@@ -65,7 +65,7 @@ class QuestionDisplay extends Component {
              }
         const timeDuration = this.getTimeDuration()
       
-        // dispatch(handleAddScoreHistory(tasky._id, timeDuration, correctedQuestionArray ))
+        dispatch(handleAddScoreHistory(tasky._id, timeDuration, correctedQuestionArray ))
 
         this.setState({
             displayResult: false,

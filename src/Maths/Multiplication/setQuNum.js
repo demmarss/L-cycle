@@ -249,7 +249,7 @@ class SetQuestionNumber extends Component {
                         </div>
                     </div>
                 <br/>
-                <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Start</p>  
+                <p className="button is-success" type='submit' onClick={this.handleSubmit} disabled={this.isEmpty()}>Create</p>  
             </form>
             :
              <p>Please log in to set question </p>   }

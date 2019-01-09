@@ -5,9 +5,12 @@
   "dependencies": {
     "axios": "^0.18.0",
     "bulma": "^0.7.2",
+    "chart.js": "^2.7.3",
     "jwt-decode": "^2.2.0",
     "rc-progress": "^2.2.6",
     "react": "^16.6.3",
+    "react-chartjs": "^1.2.0",
+    "react-chartjs-2": "^2.7.4",
     "react-dom": "^16.6.3",
     "react-redux": "^6.0.0",
     "react-router-dom": "^4.3.1",

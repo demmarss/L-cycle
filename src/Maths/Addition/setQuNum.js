@@ -35,8 +35,6 @@ class SetQuestionNumber extends Component {
         let questions = this.generateQuestions(Number(this.state.questionNumber))
         
         this.props.Status('submit', questions,[], this.state.lgroupId)
-
-        console.log(this.state.lgroupId)
                 
         this.setState({
             questionNumber: 0

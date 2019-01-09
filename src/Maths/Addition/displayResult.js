@@ -13,7 +13,7 @@ export default class DisplayResult extends Component {
                 
                 <p className="button is-success">Try Again</p>
     
-                <p className="button is-primary">Review</p>
+                <p className="button is-primary">Click to see Progress</p>
     
             </div>
         )

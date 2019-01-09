@@ -26,11 +26,7 @@ class LogIn extends Component {
         const { dispatch } = this.props;
 
         dispatch(handleSetAuthedUser(username, password));
-    
-        // dispatch(setAuthedUser(username))
-
-
-    
+        
         this.setState(currentState => ({
           toHome: currentState.username ? true : false
         }));
