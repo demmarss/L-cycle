@@ -73,7 +73,6 @@ class Navigation extends Component{
                             </Fragment>
                             :
                             <Fragment>
-                                <p>Hello {authedUser.username}</p>
                                 <Link to="/myAccount" className="button is-primary">
                                     <strong>MyAccount</strong>
                                 </Link>

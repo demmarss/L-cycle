@@ -5,7 +5,6 @@ class CreatTaskLandingPage extends Component {
     render(){
         return(
             <div>
-                <h1>V7 Create New Task Landing Page </h1>
                 <div className="columns is-mobile is-multiline is-centered">
                     <Link to='/subtraction'>
                         <div className="column is-narrow">

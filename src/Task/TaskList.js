@@ -1,11 +1,18 @@
 import React, {Component, Fragment } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {handleDeleteTask} from '../actions/tasks'
+import {handleDeleteTask, handleReceiveTasks} from '../actions/tasks'
 import Task from './Task'
 
 
 class TaskList extends Component {
+
+    componentDidMount(){
+        const {dispatch, authedUser} = this.props
+        if (authedUser){
+            dispatch(handleReceiveTasks(authedUser._id))
+        }
+    }
 
     handleDelete = (taskId) =>{
 

@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import {Link} from 'react-router-dom'
 
 export default class TaskCreated extends Component {
 render(){
@@ -6,13 +7,10 @@ render(){
         <div>
             <div className="notification is-success">
                 <p>Your task has been created. </p>
-                <p>Here are the information</p>
-                <p>Task topic:</p>
-                <p>Task group:</p>
-                <p>Number of questions:</p>
-                <p>Date created:</p>
             </div>
+            <Link to={'/myTask'}>
             <button className="button">Back to class </button>
+            </Link>
         </div>
     )
 }

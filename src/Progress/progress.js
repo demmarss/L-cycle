@@ -30,7 +30,7 @@ class Progress extends Component {
         return (           
                 <div key={taskSingle._id}>  
 
-                        {taskSingle.scoreHistory.length > 0?
+                        {scoreArray(authedUser._id, taskSingle).length > 0?
                         
                         <ProgressChart 
                             labelTopic= {taskSingle.topic}

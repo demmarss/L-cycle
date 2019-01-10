@@ -2,9 +2,9 @@ import axios from 'axios'
 import jwt_decode from 'jwt-decode';
 
 
-const apiUrl = 'http://localhost:3000/api'
+const apiUrl = 'http://localhost:3001/api'
 
-axios.defaults.baseURL = 'http://localhost:3000/api';
+axios.defaults.baseURL = 'http://localhost:3001/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
 // Creating a user

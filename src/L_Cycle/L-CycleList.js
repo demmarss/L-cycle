@@ -1,11 +1,17 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
 import LCycle from './LCycle'
-import { handleDeleteLgroup } from '../actions/learningCycle'
+import { handleDeleteLgroup, handleReceiveLgroups } from '../actions/learningCycle'
 
 
 class TaskList extends Component {
-
+    componentDidMount(){
+        const {dispatch, authedUser} = this.props
+        if (authedUser){
+            dispatch(handleReceiveLgroups(authedUser._id))
+        }
+        
+    }
 
     handleDelete=(lgroupId)=>{
 

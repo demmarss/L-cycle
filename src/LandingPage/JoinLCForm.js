@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { connect } from 'react-redux'
-import { Redirect } from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { handleJoinLgroup } from '../actions/learningCycle'
 
 class JoinLCForm extends Component {
@@ -50,9 +50,11 @@ class JoinLCForm extends Component {
                             </div>
                             <div className="field">
                                 <p className="control">
-                                    <button type="submit" className="button is-success" disabled={this.isEmpty()}>
+                                    <Link to={'/myClass'}>
+                                    <button type="submit" className="button" disabled={this.isEmpty()}>
                                     Click to Join
                                     </button>
+                                    </Link>
                                 </p>
                             </div>  
                         </div>
