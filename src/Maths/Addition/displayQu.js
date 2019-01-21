@@ -22,6 +22,23 @@ class QuestionDisplay extends Component {
         task: {}
     }
 
+    resetState = () => {
+        this.setState({
+        displayResult: true,
+        answer: Number,
+        counter: 0,
+        startTime: Date.now(),
+        endTime: Date.now(),
+        progress: 0,
+        submit: true,
+        answerArray: [],
+        typedAnswer: '',
+        scoreHistory: [],
+        correctedQuestionArray: [],
+        task: {}
+        })
+    }
+
     getTask =(taskId) =>{
         const { task } = this.props
         let taskyyy = task.find(t => t._id === taskId)
@@ -38,9 +55,8 @@ class QuestionDisplay extends Component {
     }
 
     handleSubmit = (e) =>{
-      
         const tasky = this.getTask(this.props.match.params.taskId)
-
+        
         this.setState({
             answerArray: this.state.answerArray.concat([this.state.typedAnswer]),
             counter: this.state.counter + 1,
@@ -49,6 +65,7 @@ class QuestionDisplay extends Component {
             submit: true,
             endTime: Date.now()
         })
+
         e.target.reset()
         e.preventDefault()
     }
@@ -72,7 +89,6 @@ class QuestionDisplay extends Component {
             correctedQuestionArray: correctedQuestionArray,
             task: tasky
         })
-
         e.preventDefault()
     }
 
@@ -102,7 +118,7 @@ class QuestionDisplay extends Component {
             <div>
                 {authedUser?
                 <div>
-                    <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />
+                    {( this.state.displayResult)? <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />: null}
                 {(this.state.counter < tasky.questions.length)? 
                     (<form onSubmit={this.handleSubmit}>
                         <article className="message is-link">
@@ -122,9 +138,9 @@ class QuestionDisplay extends Component {
                             </p>
                         </div> 
                     </form>)
-                    :<p className="button is-success " onClick={this.handleFinish}>Click to see result</p>
+                    :( this.state.displayResult)? <p className="button is-success " onClick={this.handleFinish}>Click to see result</p>: null
                 }
-                {!this.state.displayResult? <DisplayResult task={this.state.task} correctArray={this.state.correctedQuestionArray} />: null }
+                {!this.state.displayResult? <DisplayResult task={this.state.task} correctArray={this.state.correctedQuestionArray} resetState = {this.resetState}/>: null }
                 </div>
                 :<p>Login or Registration required</p>}
                 

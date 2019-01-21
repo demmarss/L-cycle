@@ -1,26 +1,49 @@
 import React, {Component} from 'react'
 import SetQuestion from './createTask'
+import TaskCreated from '../../taskCreatedMessage'
 import QuestionDisplay from './displayQu'
 import ResultDisplay from './displayResult'
 import ReviewDisplay from './displayReview'
-import onCreateQuestions from './SpellingService'
+import {handleCreateTask} from '../../actions/tasks'
+import { connect } from 'react-redux'
 
-export default class Spelling extends Component {
+
+class Spelling extends Component {
     state = {
         status: "",
         questions: [],
-        realQuestions: [],
         answeredQuestions:[]
       }
 
-    setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions) => {
+
+      setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions, lgroupId="") => {
+
+        // this.setState({
+        //     status: passedstatus,
+        //     questions: questions,
+        //     realQuestions: onCreateQuestions(questions),
+        //     answeredQuestions: answeredQuestions
+        // })
 
         this.setState({
             status: passedstatus,
             questions: questions,
-            realQuestions: onCreateQuestions(questions),
-            answeredQuestions: answeredQuestions
+            answeredQuestions: answeredQuestions,
+            lgroupId: lgroupId
         })
+
+        const { dispatch, authedUser } = this.props;
+        
+        let task = {
+                    topic: 'Spelling',
+                    user: authedUser._id,
+                    questions: questions,
+                    scoreHistory: []
+                    }
+
+        dispatch(handleCreateTask(task, lgroupId))
+
+        console.log("I execute")
     }
 
     setQuestions = (q) => {
@@ -33,11 +56,7 @@ export default class Spelling extends Component {
     generateResult = () =>{
 
         let correct = this.state.answeredQuestions.filter(x => x.remark === 'correct').length
-
         let result = correct* 100/this.state.answeredQuestions.length
-
-
-
         return result + '%'
     }
 
@@ -49,6 +68,8 @@ export default class Spelling extends Component {
             <h1 className='title'>Spelling</h1>
             <br/>
             {(this.state.status === '')? <SetQuestion Status={this.setStatus}/> : null}
+            {(this.state.status === 'submit')? <TaskCreated qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
+
             {(this.state.status === 'start')? <QuestionDisplay RealQuestions={realQuestions} Questions={questions} Status={this.setStatus}/>: null}
             {(this.state.status === 'finish')? <ResultDisplay RealQuestions={realQuestions} questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
             {(this.state.status ==='review')? <ReviewDisplay  RealQuestions={realQuestions} questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null}
@@ -57,3 +78,12 @@ export default class Spelling extends Component {
       }
 
 }
+
+function mapStateToProps({ authedUser, learningCycle}) {
+    return {
+      authedUser,
+      learningCycle
+    };
+  }
+  
+  export default connect(mapStateToProps)(Spelling)

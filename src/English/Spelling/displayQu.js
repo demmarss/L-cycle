@@ -1,55 +1,106 @@
 import React, { Component } from 'react'
 import { Line } from 'rc-progress';
+import { connect } from 'react-redux';
+import onCreateQuestions from './SpellingService'
+import { handleAddScoreHistory } from '../../actions/tasks';
+import DisplayResult from './displayResult';
 
 class QuestionDisplay extends Component {
 
     state = {
+        displayResult: true,
         answer: Number,
         counter: 0,
-        newAnsweredQuestion: [],
         startTime: Date.now(),
         endTime: Date.now(),
         progress: 0,
-        submit: true
+        submit: true,
+        answerArray: [],
+        typedAnswer: '',
+        scoreHistory: [],
+        correctedQuestionArray: [],
+        task: {},
+        realQuestions: []
+    }
+
+    componentDidMount(){
+        const tasky = this.getTask(this.props.match.params.taskId)
+        this.setState({
+            realQuestions: onCreateQuestions(tasky.questions)
+        })
+    }
+    resetState = () => {
+        this.setState({
+        displayResult: true,
+        answer: Number,
+        counter: 0,
+        startTime: Date.now(),
+        endTime: Date.now(),
+        progress: 0,
+        submit: true,
+        answerArray: [],
+        typedAnswer: '',
+        scoreHistory: [],
+        correctedQuestionArray: [],
+        task: {}
+        })
+    }
+
+    getTask =(taskId) =>{
+        const { task } = this.props
+        let taskyyy = task.find(t => t._id === taskId)
+        return taskyyy
     }
 
     handleChange = (e) =>{
-        console.log(e.target.value)
-        
-        this.props.RealQuestions[this.state.counter].typedAnswer = e.target.value
-        
         this.setState({
+            typedAnswer: e.target.value,
             submit: false
         })
     }
 
     handleSubmit = (e) =>{
+        const tasky = this.getTask(this.props.match.params.taskId)
         
         this.setState({
-            newAnsweredQuestion: this.state.newAnsweredQuestion.concat(this.props.RealQuestions[this.state.counter]),
+            answerArray: this.state.answerArray.concat([this.state.typedAnswer]),
             counter: this.state.counter + 1,
-            progress: (this.state.counter + 1) *100/this.props.Questions.length,
+            progress: (this.state.counter + 1) *100/tasky.questions.length,
             answer: Number,
             submit: true,
             endTime: Date.now()
         })
 
-        e.target.reset()
         
+
+        e.target.reset()
         e.preventDefault()
     }
-    
-
+        
     handleFinish = (e) =>{
-        this.generateQuestionWithRemark(this.state.newAnsweredQuestion)
-        this.props.Status('finish', this.props.Questions, this.state.newAnsweredQuestion)
+     
+        const {dispatch } = this.props
+        const tasky = this.getTask(this.props.match.params.taskId)
+        
+        let correctedQuestionArray = []
+        for (let i=0; i<this.state.answerArray.length; i++){
+            if (this.state.realQuestions[i].missingCharacter === this.state.answerArray[i]) {
+                correctedQuestionArray.push(i)
+                }
+             }
+        const timeDuration = this.getTimeDuration()
+      
+        dispatch(handleAddScoreHistory(tasky._id, timeDuration, correctedQuestionArray ))
+
+        this.setState({
+            displayResult: false,
+            correctedQuestionArray: correctedQuestionArray,
+            task: tasky
+        })
         e.preventDefault()
     }
 
-    generateQuestionWithRemark = (newAnsweredQuestion)=>{
-        newAnsweredQuestion.map(x => (x.typedAnswer == x.answer)? (x.remark = 'correct') : (x.remark = 'wrong'))
-    }
-    
+
     getTimeDuration = () => {
         let duration = this.state.endTime - this.state.startTime
         return this.secondsToHms(Math.floor(duration/1000))
@@ -68,20 +119,26 @@ class QuestionDisplay extends Component {
         return hDisplay + mDisplay + sDisplay; 
     }
     render (){
+
+        const {authedUser}= this.props
+        const {realQuestions} = this.state
+
         return (
             <div>
-                
-                <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />
-                {(this.state.counter < this.props.RealQuestions.length)? 
+                {authedUser?
+                <div>
+                {( this.state.displayResult)? <Line percent={this.state.progress} strokeWidth="4" strokeColor="#ff45ff" />: null}
+
+                {(this.state.counter < realQuestions.length)? 
                     (<form onSubmit={this.handleSubmit}>
                         <article className="message is-link">
                             <div className="message-header">
                                 <p>Time spent : {this.getTimeDuration()}</p>          
                             </div>
                             <div className="message-body has-text-centered title has-text-success is-size-1">
-                                <h1>{this.props.RealQuestions[this.state.counter].wordWithMissingCharacter}</h1>
-                                <div className="control has-text-centered" onChange={this.handleChange}>
-                                    {this.props.RealQuestions[this.state.counter].optionToSelected.map(x=>
+                                <h1>{realQuestions[this.state.counter].wordWithMissingCharacter}</h1>
+                                <div className="control has-text-centered" onInput={this.handleChange}>
+                                    {realQuestions[this.state.counter].optionToSelected.map(x=>
                                         <label className="radio title" key={x}>
                                             <input type="radio" name='level' value={x}/>
                                             {x}
@@ -96,12 +153,25 @@ class QuestionDisplay extends Component {
                             </p>
                         </div> 
                     </form>)
-                    :<p className="button is-success " onClick={this.handleFinish}>Click to see result</p>
+                    :( this.state.displayResult)? <p className="button is-success " onClick={this.handleFinish}>Click to see result</p>: null
                 }  
+                {!this.state.displayResult? <DisplayResult task={this.state.task} correctArray={this.state.correctedQuestionArray} resetState = {this.resetState}/>: null }
+                </div>
+                :<p>Login or Registration required</p>}
             </div>
+            
         )    
     }
 
 }
 
-export default QuestionDisplay
+function mapStateToProps({authedUser, depatch, learningCycle, task}){
+    return{
+        authedUser,
+        depatch,
+        learningCycle,
+        task
+    }
+}
+
+export default connect(mapStateToProps)(QuestionDisplay)

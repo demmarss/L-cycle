@@ -6,9 +6,7 @@ import {Bar} from 'react-chartjs-2';
 class ProgressChart extends Component {
 
     render(){
-        
- 
-        
+                
         const { labelTopic, scoreArray, xlableArray, yAxisMax  } = this.props
 
         const data = {

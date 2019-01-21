@@ -22,11 +22,10 @@ class Progress extends Component {
     render(){
         const {taskSingle, authedUser } = this.props
 
-        const scoreArray = (userId, task) => this.attempts(userId, task).map(x => x.correctedArray.length)
+        const scoreArray = (userId, task) => this.attempts(userId, task).map(x => x.correctedArray.length*100/task.questions.length)
 
         const xlableArray = (userId, task) => this.getxlabel(scoreArray(userId, task))
 
-     
         return (           
                 <div key={taskSingle._id}>  
 
@@ -36,7 +35,7 @@ class Progress extends Component {
                             labelTopic= {taskSingle.topic}
                             scoreArray = {scoreArray(authedUser._id, taskSingle)} 
                             xlableArray = {xlableArray(authedUser._id, taskSingle)}
-                            yAxisMax = {taskSingle.questions.length}
+                            yAxisMax = {100}
                             />: null
                         }      
                 </div>

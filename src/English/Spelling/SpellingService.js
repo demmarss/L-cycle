@@ -1,11 +1,9 @@
-export default function onCreateQuestions(task){
+export default function onCreateQuestions(words){
     let questions = [];
 
-    let wordArray = task.words;
+    for (let i=0; i<words.length; i++) {
 
-    for (let i=0; i<wordArray.length; i++) {
-
-        questions.push(onCreateQuestion(wordArray[i]));
+        questions.push(onCreateQuestion(words[i]));
       }
 
     return questions;

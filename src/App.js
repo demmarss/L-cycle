@@ -20,6 +20,7 @@ import AdditionQuestion from './Maths/Addition/displayQu'
 import DivisionQuestion from './Maths/Division/displayQu'
 import MultiplicationQuestion from './Maths/Multiplication/displayQu'
 import SubtractionQuestion from './Maths/Subtraction/displayQu'
+import SpellingQuestion from './English/Spelling/displayQu'
 
 import { connect } from 'react-redux'
 import LCycleDetail from './L_Cycle/L-CycleDetail'
@@ -72,6 +73,7 @@ class App extends Component {
               <Route exact path='/Divisionquestion/:taskId' component = {DivisionQuestion}/>
               <Route exact path='/Multiplicationquestion/:taskId' component = {MultiplicationQuestion}/>
               <Route exact path='/Subtractionquestion/:taskId' component = {SubtractionQuestion}/>
+              <Route exact path='/Spellingquestion/:taskId' component = {SpellingQuestion}/>
           </div>
         </div>
 
