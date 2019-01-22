@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Link} from 'react-router-dom'
 import { connect } from 'react-redux'
-import ProgressChart from './progressChart'
+import ProgressChart from './questionsChart'
 
 class Progress extends Component {
 
@@ -10,13 +10,13 @@ class Progress extends Component {
         return attempt
     }
 
-    getxlabel = (scoreArray) => {
-        let xlabel = []
-        for (let i=0; i<scoreArray.length; i++){
-            xlabel.push(i+1)
-        }
-        return xlabel
-    } 
+    // getxlabel = (scoreArray) => {
+    //     let xlabel = []
+    //     for (let i=0; i<scoreArray.length; i++){
+    //         xlabel.push(i+1)
+    //     }
+    //     return xlabel
+    // } 
 
     
     render(){
@@ -24,19 +24,19 @@ class Progress extends Component {
 
         const scoreArray = (userId, task) => this.attempts(userId, task).map(x => x.correctedArray.length*100/task.questions.length)
 
-        const xlableArray = (userId, task) => this.getxlabel(scoreArray(userId, task))
+        // const xlableArray = (userId, task) => this.getxlabel(scoreArray(userId, task))
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
 
         const correctedArray = this.attempts(authedUser._id, taskSingle).map(x => x.correctedArray)
 
-        console.log("Corrected Array:", correctedArray)
+        // console.log("Corrected Array:", correctedArray)
 
-        console.log("total attempts: ", correctedArray.length)
+        // console.log("total attempts: ", correctedArray.length)
 
-        console.log('here is the task', taskSingle)
+        // console.log('here is the task', taskSingle)
 
-        console.log("total number of questions needed for xlabel", taskSingle.questions.length)
+        // console.log("total number of questions needed for xlabel", taskSingle.questions.length)
 
 
         // this give all the question index that were answered correctly
@@ -63,8 +63,11 @@ class Progress extends Component {
 
         console.log('Xlabel needed', Xlabel)
         
+        const totalAttempt = correctedArray.length
+
 
         //////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
         return (           
                 <div key={taskSingle._id}>  
@@ -73,8 +76,8 @@ class Progress extends Component {
                         
                         <ProgressChart 
                             labelTopic= {taskSingle.topic}
-                            scoreArray = {scoreArray(authedUser._id, taskSingle)} 
-                            xlableArray = {xlableArray(authedUser._id, taskSingle)}
+                            scoreArray = {Ylabel.map(x=> x*100/totalAttempt)} 
+                            xlableArray = {Xlabel}
                             yAxisMax = {100}
                             />: null
                         }      

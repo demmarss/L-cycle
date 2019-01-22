@@ -49,10 +49,11 @@ class Navigation extends Component{
                             Progress
                         </Link>
 
-                        <Link to="/myClass" className="navbar-item" 
-                        
-                        onClick={()=>dispatch(handleReceiveLgroups(authedUser._id))}
-                        >
+                        <Link to="/myQuestionAnalysis" className="navbar-item" onClick={()=>dispatch(handleReceiveTasks(authedUser._id))}>
+                            Question Analysis
+                        </Link>
+
+                        <Link to="/myClass" className="navbar-item"   onClick={()=>dispatch(handleReceiveLgroups(authedUser._id))}>
                             My Class
                         </Link>
 

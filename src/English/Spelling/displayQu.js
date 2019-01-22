@@ -30,6 +30,7 @@ class QuestionDisplay extends Component {
         })
     }
     resetState = () => {
+        const tasky = this.getTask(this.props.match.params.taskId)
         this.setState({
         displayResult: true,
         answer: Number,
@@ -42,7 +43,8 @@ class QuestionDisplay extends Component {
         typedAnswer: '',
         scoreHistory: [],
         correctedQuestionArray: [],
-        task: {}
+        task: {},
+        realQuestions: onCreateQuestions(tasky.questions)
         })
     }
 
@@ -84,7 +86,7 @@ class QuestionDisplay extends Component {
         
         let correctedQuestionArray = []
         for (let i=0; i<this.state.answerArray.length; i++){
-            if (this.state.realQuestions[i].missingCharacter === this.state.answerArray[i]) {
+            if (this.state.realQuestions[i].missingCharacter.toLowerCase() === this.state.answerArray[i].toLowerCase()) {
                 correctedQuestionArray.push(i)
                 }
              }
@@ -136,12 +138,12 @@ class QuestionDisplay extends Component {
                                 <p>Time spent : {this.getTimeDuration()}</p>          
                             </div>
                             <div className="message-body has-text-centered title has-text-success is-size-1">
-                                <h1>{realQuestions[this.state.counter].wordWithMissingCharacter}</h1>
+                                <h1>{realQuestions[this.state.counter].wordWithMissingCharacter.toLowerCase()}</h1>
                                 <div className="control has-text-centered" onInput={this.handleChange}>
                                     {realQuestions[this.state.counter].optionToSelected.map(x=>
                                         <label className="radio title" key={x}>
                                             <input type="radio" name='level' value={x}/>
-                                            {x}
+                                            {x.toLowerCase()}
                                         </label>
                                     )}
                                 </div>

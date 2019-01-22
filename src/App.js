@@ -3,6 +3,7 @@ import Navigation from './Navigation'
 import LandingPage from './LandingPage/LandingPage'
 import TaskList from './Task/TaskList'
 import ProgressList from './Progress/progressList'
+import QuestionAnalysis from './QuestionAnalysis'
 import ClassList from './L_Cycle/L-CycleList'
 import SignUp from './user/CreateAcct'
 import LogIn from './user/LogIn';
@@ -48,6 +49,7 @@ class App extends Component {
               <Route exact path="/myTask" component={TaskList} />
               <Route exact path="/task/:taskId" component={TaskDetail} />
               <Route exact path="/myProgress" component={ProgressList} />
+              <Route exact path="/myQuestionAnalysis" component={QuestionAnalysis} />
               <Route exact path="/myClass" component={ClassList} />
               <Route exact path="/lgroups/:lgroupId" component={LCycleDetail} />
 
