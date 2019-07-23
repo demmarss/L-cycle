@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-dom'
 
 export default class DisplayResult extends Component {
 

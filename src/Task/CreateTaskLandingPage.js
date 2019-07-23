@@ -38,11 +38,11 @@ class CreatTaskLandingPage extends Component {
                             </p>
                         </div>
                     </Link>
-                    <Link to='/division'>
+                    <Link to='/reading'>
                         <div className="column is-narrow">
                             <p className="bd-notification is-primary">
-                            <code className="html">Phonics</code><br/>
-                            Phonics
+                            <code className="html">Reading</code><br/>
+                            Reading
                             </p>
                         </div>
                     </Link>

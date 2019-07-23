@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Link } from 'react-dom'
 
 export default class DisplayResult extends Component {
 
@@ -15,7 +14,6 @@ export default class DisplayResult extends Component {
                 
                 <p className="button is-success" onClick={resetState}>Try Again</p>
     
-                {/* <p className="button is-primary">Click to see Progress</p> */}
     
             </div>
         )

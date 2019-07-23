@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux'
 import CreateLC from './CreateLC'
 import JoinLC from './JoinLC'
 import CreateTask from '../Task/CreateTaskLandingPage'
@@ -7,6 +8,7 @@ import JoinLCForm from './JoinLCForm'
 import DisplayCreateTask from './DisplayCreateTask'
 
 class LandingPage extends Component {
+  
   state = {
     toCreat: false,
     toJoin: false,
@@ -30,14 +32,20 @@ class LandingPage extends Component {
 
   render() {
 
+    const { authedUser } = this.props
+
+    console.log (authedUser)
+
     return (
         <div>
           <br/>
+          {authedUser? 
+           <div>
           <div className="tabs is-centered">
             <ul>  
-              <li><CreateLC toggle={this.toggle}/></li>
-              <li><JoinLC toggle={this.toggle}/></li>
-              <li><DisplayCreateTask toggle={this.toggle}/></li>
+              {(authedUser.role === "Teacher")? <li><CreateLC toggle={this.toggle}/></li>: null}
+              {(authedUser.role === "Student")? <li><JoinLC toggle={this.toggle}/></li>: null}
+              {(authedUser.role === "Teacher")? <li><DisplayCreateTask toggle={this.toggle}/></li>: null}
             </ul>
           </div>
           <div className="columns is-mobile is-centered">
@@ -47,9 +55,24 @@ class LandingPage extends Component {
             </div>
           </div>
           {(this.state.toDisplayTask)? <CreateTask/>: null}
+        
+        </div>
+        : null}
+          
         </div>
     );
   }
 }
 
-export default LandingPage;
+
+function mapStateToProps({ authedUser, learningCycle, task, dispatch, user}) {
+  return {
+    authedUser,
+    learningCycle,
+    task,
+    dispatch,
+    user
+  };
+}
+
+export default connect(mapStateToProps)(LandingPage)

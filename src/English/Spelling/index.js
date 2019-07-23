@@ -18,13 +18,6 @@ class Spelling extends Component {
 
       setStatus = (passedstatus, questions = this.state.questions, answeredQuestions = this.state.answeredQuestions, lgroupId="") => {
 
-        // this.setState({
-        //     status: passedstatus,
-        //     questions: questions,
-        //     realQuestions: onCreateQuestions(questions),
-        //     answeredQuestions: answeredQuestions
-        // })
-
         this.setState({
             status: passedstatus,
             questions: questions,

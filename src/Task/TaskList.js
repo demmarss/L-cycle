@@ -1,7 +1,8 @@
-import React, {Component, Fragment } from 'react'
+import React, {Component } from 'react'
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import {handleDeleteTask, handleReceiveTasks} from '../actions/tasks'
+import {handleDeleteTask, handleReceiveTasks, handleAssignLgroup, handleRemoveAssignLgroup} from '../actions/tasks'
+import {handleReceiveLgroups} from '../actions/learningCycle'
 import Task from './Task'
 
 
@@ -11,21 +12,31 @@ class TaskList extends Component {
         const {dispatch, authedUser} = this.props
         if (authedUser){
             dispatch(handleReceiveTasks(authedUser._id))
+            dispatch(handleReceiveLgroups(authedUser._id))
         }
     }
 
     handleDelete = (taskId) =>{
 
         const { dispatch } = this.props
-
-        console.log('I trigger id', taskId)
         
         dispatch(handleDeleteTask(taskId))
     }
 
+    handleAssignLg = (task, lgroupId) => {
+
+        const { dispatch } = this.props
+
+        dispatch(handleAssignLgroup(task._id, lgroupId))
+    }
+
+    unAssignedTask=(taskId, lgroupId)=>{
+        const { dispatch} = this.props
+        dispatch(handleRemoveAssignLgroup(taskId, lgroupId))
+    }
 
     render(){
-        const { authedUser, task } = this.props
+        const { authedUser, task, learningCycle } = this.props
         return (
             <div>
                 {authedUser?
@@ -39,7 +50,15 @@ class TaskList extends Component {
                         
                     </div>:
                     task.map(task=> 
-                        <Task handleDelete={this.handleDelete} task={task} />            
+                        <Task 
+                            handleDelete={this.handleDelete} 
+                            task={task}
+                            key={task._id} 
+                            assigningLgroup={this.handleAssignLg} 
+                            unAssignedTask={this.unAssignedTask}
+                            user = {authedUser}
+                            learningCycle = {learningCycle}
+                        />            
                     ) :
                     <p className="box has-background-success has-text-warning">Please login or signup</p>}
             </div>
@@ -47,10 +66,12 @@ class TaskList extends Component {
     }
 }
 
-function mapStateToProps ({ authedUser, task}){
+function mapStateToProps ({ authedUser, task, learningCycle}){
     return {
         authedUser,
-        task
+        task,
+        learningCycle
+
     }
 }
 

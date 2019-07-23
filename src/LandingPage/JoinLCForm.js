@@ -37,7 +37,7 @@ class JoinLCForm extends Component {
         const { authedUser } = this.props
         return (
             <div>
-                {authedUser? <form className="form" onSubmit={this.handleSubmit}>
+                {authedUser? <form className="form">
                     <article className="message is-primary">
                         <div className="message-header">
                             <p>Join L-Cycle</p>
@@ -51,7 +51,7 @@ class JoinLCForm extends Component {
                             <div className="field">
                                 <p className="control">
                                     <Link to={'/myClass'}>
-                                    <button type="submit" className="button" disabled={this.isEmpty()}>
+                                    <button type="submit" onClick={this.handleSubmit} className="button" disabled={this.isEmpty()}>
                                     Click to Join
                                     </button>
                                     </Link>
@@ -67,7 +67,7 @@ class JoinLCForm extends Component {
     }
 }
 
-function mapStateToProps({ authedUser, learningCycle}) {
+function mapStateToProps({ authedUser}) {
     return {
       authedUser
     };

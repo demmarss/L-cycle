@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import {SpellingTaskModel} from './models'
 import { connect } from 'react-redux'
 import { handleReceiveLgroups } from '../../actions/learningCycle';
 

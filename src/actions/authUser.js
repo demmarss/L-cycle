@@ -3,12 +3,13 @@ import { loginUser } from '../service/api'
 export const SET_AUTHED_USER = "SET_AUTHED_USER";
 export const LOGOUT_USER = "LOGOUT_USER";
 
-export function setAuthedUser(username, _id, token) {
+export function setAuthedUser(username, _id, token, role) {
   return {
     type: SET_AUTHED_USER,
     username,
     _id,
-    token
+    token,
+    role
   };
 }
 
@@ -27,6 +28,8 @@ export function handleSetAuthedUser(username, password) {
       username, 
       password
     })
-      .then(({username, _id, token}) => dispatch(setAuthedUser(username, _id, token)));
+      .then(({username, _id, token, role}) => dispatch(setAuthedUser(username, _id, token, role))
+      
+      );
   };
 }

@@ -4,6 +4,8 @@ import jwt_decode from 'jwt-decode';
 
 const apiUrl = 'http://localhost:3001/api'
 
+export const apiUrlForImages = 'http://localhost:3001'
+
 axios.defaults.baseURL = 'http://localhost:3001/api';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 
@@ -15,9 +17,18 @@ export async function createUser(user) {
 
 
 export async function gettingUser(userId) {
-    const response = await axios.get(`/users/me`,userId);
+    const response = await axios.get(`/users/me`, userId);
        console.log(response.data);
  }
+
+
+export async function gettingListOfUsers({userIdArray}) {
+   console.log("Array sent to api", userIdArray)
+   const response = await axios.post(`/users/getManyUsers`, {userIdArray });
+   return response.data;
+ }
+ 
+ 
 
 // Creating a Task and adding it to a learning group
 export async function createTask({task, token, lgroupId}) {
@@ -25,6 +36,46 @@ export async function createTask({task, token, lgroupId}) {
     const response = await axios.post(`/tasks`, {task, lgroupId});
     return response.data;
  }
+
+ export async function createTaskMainInfo({taskMainInfo, token}) {
+     console.log("To be sent to backend.....", taskMainInfo)
+    axios.defaults.headers['x-auth-token'] = token
+    const response = await axios.post(`/tasks/creatTaskMainInfo`, {taskMainInfo});
+    return response.data;
+ }
+
+ 
+ export async function createTaskWithImages({formData, token}) {
+    axios.defaults.headers['x-auth-token'] = token
+    const response = await axios.post(`/tasks/saveImages`, formData);
+    return response.data;
+ }
+
+ export async function createTaskWithImage1({formData, token}) {
+   axios.defaults.headers['x-auth-token'] = token
+   const response = await axios.post(`/tasks/saveImage1`, formData);
+   return response.data;
+}
+
+ export async function createOptionTaskWithImages({taskId, token}) {
+    axios.defaults.headers['x-auth-token'] = token
+    const response = await axios.put(`/tasks/addOption`, {taskId});
+    return response.data;
+ }
+ 
+ export async function createAssignLgroup({taskId, lgroupId, token}) {
+    console.log("Task id Api", taskId)
+   axios.defaults.headers['x-auth-token'] = token
+   const response = await axios.put(`/tasks/assignLgroup`, {taskId, lgroupId });
+   return response.data;
+}
+
+
+export async function createRemoveAssignLgroup({taskId, lgroupId, token}) {
+  axios.defaults.headers['x-auth-token'] = token
+  const response = await axios.put(`/tasks/removeAssignLgroup`, {taskId, lgroupId });
+  return response.data;
+}
 
  // To delete Lgroup
  export async function deletingLgroup({lgroupId, token}){
@@ -56,9 +107,9 @@ export async function createLgroup({lgtitle, token}) {
 
  // To join Learning group
  export async function joinLgroup({lgCode, token}) {
+
     axios.defaults.headers['x-auth-token'] = token
     const response = await axios.put(`/lgroups/${lgCode}`);
-        console.log('I this object of array', response.data) //////////////////////////////////////////////////////////////////////////
        return response.data; // this should be array of learning groups that the user belong
  }
  
@@ -80,7 +131,6 @@ export async function receivingLgroups({userId, token}) {
  export async function receivingTasks({userId, token}) {
     axios.defaults.headers['x-auth-token'] = token
     const response = await axios.get(`/tasks/${userId}`);
-        console.log('From Api:', response.data)
        return response.data; // this should be array of tasks from the classes that user belong
  }
 
@@ -90,12 +140,27 @@ export async function receivingLgroups({userId, token}) {
     const response = await axios.put(`/tasks/${taskyId}`, {taskyId, timeDuration, correctedQuestionArray})
     return response.data
  }
+
+ 
+ // To update task with answer from a specific user
+ export async function addingScoreHistoryToTasksSecond({studentId, taskyId, correctedQuestionArray, token}){
+   axios.defaults.headers['x-auth-token'] = token
+   const response = await axios.put(`/tasks/second/${taskyId}`, {studentId, taskyId, correctedQuestionArray})
+   return response.data
+}
+
+ export async function addingAudioResponseToTask({taskyId, fd, token}){
+   axios.defaults.headers['x-auth-token'] = token
+   const response = await axios.put(`/tasks/addAudioResponse/${taskyId}`, fd)
+   return response.data
+}
+ 
  // To login User
 export async function loginUser(user) {
     const response = await axios.post(`/auth`, user);
        const token = response.data
-       const { username, _id } = decodeToken(token)
-       return {username, _id, token} 
+       const { username, _id, role } = decodeToken(token)
+       return {username, _id, token, role} 
  }
 
  // to decoed token

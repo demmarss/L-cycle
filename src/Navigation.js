@@ -17,8 +17,6 @@ class Navigation extends Component{
         
     }
 
-
-
     render(){
 
         const { authedUser, dispatch } = this.props

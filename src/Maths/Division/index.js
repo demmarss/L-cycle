@@ -1,9 +1,6 @@
 import React, {Component} from 'react'
 import SetQuestionNumber from './setQuNum'
-import QuestionDisplay from './displayQu'
-import ResultDisplay from './displayResult'
 import TaskCreated from '../../taskCreatedMessage'
-import ReviewDisplay from './displayReview'
 import {handleCreateTask} from '../../actions/tasks'
 import { connect } from 'react-redux'
 

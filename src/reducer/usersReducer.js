@@ -1,4 +1,4 @@
-import { GET_USER, DELETE_USER, CREATE_USER} from "../actions/users";
+import { GET_USER, DELETE_USER, CREATE_USER, GET_LIST_OF_USERS} from "../actions/users";
 
 export default function user(state = {}, action) {
   switch (action.type) {
@@ -7,6 +7,11 @@ export default function user(state = {}, action) {
         ...state,
         ...action.userId
       }
+    case GET_LIST_OF_USERS:
+        return {
+          ...state,
+          ...action.users
+        }
 
     case DELETE_USER:
       return action.userId;

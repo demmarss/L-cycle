@@ -1,16 +1,10 @@
-import {getUsers} from './users.js'
-import {setAuthedUser} from './authUser'
-import {getLCycle} from './learningCycle'
+import {handleGetUser} from './users.js'
+import {handleReceiveLgroups} from './learningCycle'
+import {handleReceiveTasks} from './tasks'
 
-// let AUTHED_ID = 
 
-export function handleInitialData () {
-    return (dispatch) => {
-      return getInitialData()
-        .then(({ usersId, LCyclesId }) => {
-          dispatch(getUsers(usersId));
-          dispatch(getLCycle(LCyclesId));
-        //   dispatch(setAuthedUser(AUTHED_ID));
-        });
-    };
+export function getInitialData (userId){
+    handleGetUser(userId)
+    handleReceiveLgroups(userId)
+    handleReceiveTasks(userId)
   }

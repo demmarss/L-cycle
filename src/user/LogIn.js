@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import logo from '../image/LClogo.png'
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux'
-import { setAuthedUser, handleSetAuthedUser } from '../actions/authUser'
+import { handleSetAuthedUser } from '../actions/authUser'
 
 class LogIn extends Component {
 

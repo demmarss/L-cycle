@@ -15,6 +15,7 @@ import Subtraction from './Maths/Subtraction'
 import Addition from './Maths/Addition'
 import Multiplication from './Maths/Multiplication'
 import Division from './Maths/Division'
+import Reading from './Language/Reading'
 import CreatTaskLandingPg from './Task/CreateTaskLandingPage'
 
 import AdditionQuestion from './Maths/Addition/displayQu'
@@ -22,30 +23,29 @@ import DivisionQuestion from './Maths/Division/displayQu'
 import MultiplicationQuestion from './Maths/Multiplication/displayQu'
 import SubtractionQuestion from './Maths/Subtraction/displayQu'
 import SpellingQuestion from './English/Spelling/displayQu'
+import ReadingPicMatchingQuestion from './Language/Reading/displayQuRPicMatching'
+import ReadingTextOutQuestion from './Language/Reading/displayQuRTextOut'
+
+import EvaluationReadingOutPictures from './Language/Reading/displayEvaluationRTextOut'
 
 import { connect } from 'react-redux'
 import LCycleDetail from './L_Cycle/L-CycleDetail'
-// import handleInitialData from './actions/shared'
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import './App.css';
 import Spelling from './English/Spelling';
 
 class App extends Component {
 
-  // componentDidMount(){
-  //   this.props.dispatch(handleInitialData())
-  //   }
-
   render() {
 
     return (
       <Router>
-        <div className="App container">
+        <div className="container">
           <Navigation />
           <br/>
           <Route exact path="/" component={LandingPage} />
-          <div className="columns is-mobile is-centered">
-            <div className="column is-10-mobile is-6-tablet is-6-desktop is-4-fullhd">
+          
+            <div className="container column is-centered is-10-mobile is-6-tablet is-6-desktop">
               <Route exact path="/myTask" component={TaskList} />
               <Route exact path="/task/:taskId" component={TaskDetail} />
               <Route exact path="/myProgress" component={ProgressList} />
@@ -69,6 +69,7 @@ class App extends Component {
               <Route exact path='/multiplication' component = {Multiplication}/>
               <Route exact path='/division' component = {Division}/>
               <Route exact path='/spelling' component = {Spelling}/>
+              <Route exact path='/reading' component = {Reading}/>
 
               {/* Loading Question dispaly pages */}
               <Route exact path='/Additionquestion/:taskId' component = {AdditionQuestion}/>
@@ -76,9 +77,13 @@ class App extends Component {
               <Route exact path='/Multiplicationquestion/:taskId' component = {MultiplicationQuestion}/>
               <Route exact path='/Subtractionquestion/:taskId' component = {SubtractionQuestion}/>
               <Route exact path='/Spellingquestion/:taskId' component = {SpellingQuestion}/>
-          </div>
-        </div>
+              <Route exact path='/ReadingMachingTextquestion/:taskId' component = {ReadingPicMatchingQuestion}/>
+              <Route exact path='/ReadingTextOutquestion/:taskId' component = {ReadingTextOutQuestion}/>
 
+              {/* Loading Evaluation dispaly pages */}
+              <Route exact path='/ReadingTextOutevaluation/:taskId/:lgroupId' component = {EvaluationReadingOutPictures}/>
+          </div>
+        
         </div>
       </Router>
     );

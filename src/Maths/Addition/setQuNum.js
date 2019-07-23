@@ -118,7 +118,7 @@ class SetQuestionNumber extends Component {
       }
 
     render(){
-        const { authedUser, learningCycle, dispatch } = this.props
+        const { authedUser, learningCycle } = this.props
 
         return (
             <div>

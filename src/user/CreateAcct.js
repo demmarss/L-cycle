@@ -9,7 +9,8 @@ class CreateAcct extends Component {
         username: "",
         password: '',
         rememberme: false,
-        toHome: false
+        toHome: false,
+        role: "Student"
       };
     
       handleChange = prop => event => {
@@ -22,10 +23,10 @@ class CreateAcct extends Component {
           
         e.preventDefault();
         
-        const { username, password } = this.state;
+        const { username, password, role } = this.state;
         const { dispatch } = this.props;
     
-        dispatch(handleCreateUser(username, password));
+        dispatch(handleCreateUser(username, password, role));
     
         this.setState(currentState => ({
           toHome: currentState.username ? true : false
@@ -62,6 +63,27 @@ class CreateAcct extends Component {
                         <div className="field">
                             <div className="control">
                                 <input className="input" type="password" onChange={this.handleChange('password')} placeholder="Your Password"/>
+                            </div>
+                        </div>
+
+                        <div className="field is-horizontal">
+                            <div className="field-label">
+                                <label className="label">Select Role</label>
+                            </div>
+                            <div className="field-body">
+                                
+                                <div className="field">
+                                    <div className="control has-text-centered" onChange={this.handleChange('role')} value={this.state.role}>
+                                        <label className="radio">
+                                            <input type="radio" name='role' value="Teacher"/>
+                                            Teacher/Parent
+                                        </label>
+                                        <label className="radio">
+                                            <input type="radio" name='role' value="Student" defaultChecked/>
+                                            Student/Learner
+                                        </label>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 

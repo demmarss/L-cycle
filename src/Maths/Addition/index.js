@@ -1,10 +1,7 @@
 import React, {Component} from 'react'
 import SetQuestionNumber from './setQuNum'
-import QuestionDisplay from './displayQu'
 import TaskCreated from '../../taskCreatedMessage'
 import { connect } from 'react-redux'
-import ResultDisplay from './displayResult'
-import ReviewDisplay from './displayReview'
 import {handleCreateTask} from '../../actions/tasks'
 
 class Addition extends Component {
@@ -46,16 +43,12 @@ class Addition extends Component {
     }
 
       render() {
-        // const {questions, answeredQuestions} = this.state;
         return (
           <div className="App">
             
             {(this.state.status === '')? <SetQuestionNumber qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             {(this.state.status === 'submit')? <TaskCreated qNumber = {this.state.questionNumber} Status={this.setStatus}/> : null}
             
-            {/* {(this.state.status === 'start')? <QuestionDisplay Questions={this.state.questions} Status={this.setStatus}/>: null}
-            {(this.state.status === 'finish')? <ResultDisplay questions={questions} Result={this.generateResult()} Status={this.setStatus}/>: null}
-            {(this.state.status ==='review')? <ReviewDisplay questions={questions} answered={answeredQuestions} Status={this.setStatus}/>: null} */}
           </div>
         );
       }

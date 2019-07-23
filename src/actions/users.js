@@ -1,13 +1,21 @@
-import { createUser, gettingUser } from '../service/api'
+import { createUser, gettingUser, gettingListOfUsers } from '../service/api'
 
 export const GET_USER = "GET_USER";
 export const CREATE_USER = "CREATE_USER";
 export const DELETE_USER = "DELETE_USER";
+export const GET_LIST_OF_USERS="GET_LIST_OF_USERS"
 
 export function getUser(userId) {
   return {
     type: GET_USER,
     userId
+  };
+}
+
+export function getListOfUsers(users) {
+  return {
+    type: GET_LIST_OF_USERS,
+    users
   };
 }
 
@@ -26,12 +34,13 @@ export function deleteUser(userId) {
   }
 
 // creating handler that will be invoked in the UI 
-export function handleCreateUser(username, password) {
+export function handleCreateUser(username, password, role) {
     return (dispatch) => {
       // invoke api method    
       return createUser({
         username,
-        password
+        password,
+        role
       })
       // calling action through dispatch and assigning it to username
         .then(({username}) => dispatch(addUser(username)));
@@ -48,6 +57,18 @@ export function handleGetUser(userId) {
     };
   }
 
+  export function handlingGetListOfUsers(userIdArray) {
+    return (dispatch) => {
+          
+      return gettingListOfUsers({
+        userIdArray
+      })
+        .then((users) => dispatch(getListOfUsers(users)));
+    };
+  }
+
+
+  
 
 
 /*
