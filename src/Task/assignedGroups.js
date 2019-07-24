@@ -47,8 +47,6 @@ class AssignedGroups extends Component{
             })
         })
 
-        console.log("After.....................", commonUserArray)
-
         return commonUserArray
         }
 
