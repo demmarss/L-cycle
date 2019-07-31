@@ -38,9 +38,9 @@ class LandingPage extends Component {
 
     return (
         <div>
-          <br/>
           {authedUser? 
            <div>
+             <br/>
           <div className="tabs is-centered">
             <ul>  
               {(authedUser.role === "Teacher")? <li><CreateLC toggle={this.toggle}/></li>: null}
@@ -58,6 +58,18 @@ class LandingPage extends Component {
         
         </div>
         : null}
+        <div className="hero is-info is-large">
+          <div className="hero-body">
+            <div className="container has-text-centered">
+              <p className="title">
+                Learning Management &
+              </p>
+              <p className="title">
+                Student Engagement System
+              </p>
+            </div>
+          </div>
+        </div>
           
         </div>
     );

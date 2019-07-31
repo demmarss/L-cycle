@@ -15,12 +15,23 @@ export async function createUser(user) {
         return response.data;
   }
 
+// Create LMS user
+
+export async function createLMSUser({formData}) {
+   const response = await axios.post(`/users/createLMSUser`, formData);
+      return response.data;
+}
+
 
 export async function gettingUser(userId) {
     const response = await axios.get(`/users/me`, userId);
-       console.log(response.data);
+    return response.data;
  }
 
+ export async function gettingLmsUsers() {
+   const response = await axios.post('/users/LmsUsers',);
+   return response.data;
+}
 
 export async function gettingListOfUsers({userIdArray}) {
    console.log("Array sent to api", userIdArray)

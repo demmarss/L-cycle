@@ -17,6 +17,7 @@ import Multiplication from './Maths/Multiplication'
 import Division from './Maths/Division'
 import Reading from './Language/Reading'
 import CreatTaskLandingPg from './Task/CreateTaskLandingPage'
+import Admin from './Lms'
 
 import AdditionQuestion from './Maths/Addition/displayQu'
 import DivisionQuestion from './Maths/Division/displayQu'
@@ -44,6 +45,8 @@ class App extends Component {
           <Navigation />
           <br/>
           <Route exact path="/" component={LandingPage} />
+          
+          <Route exact path="/admin" component={Admin} />
           
             <div className="container column is-centered is-10-mobile is-6-tablet is-6-desktop">
               <Route exact path="/myTask" component={TaskList} />

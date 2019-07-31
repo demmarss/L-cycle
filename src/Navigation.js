@@ -23,7 +23,7 @@ class Navigation extends Component{
         
     return (
         <div className="container">
-            <nav className="navbar is-warning" role="navigation" aria-label="main navigation">
+            <nav className="navbar is-info" role="navigation" aria-label="main navigation">
                 <div className="navbar-brand">
                 
                     <Link to='/'>
@@ -41,6 +41,9 @@ class Navigation extends Component{
                     <div className="navbar-start">
                         <Link to="/" className="navbar-item">
                             Home
+                        </Link>
+                        <Link to="/admin" className="navbar-item">
+                            AdminOnly
                         </Link>
 
                         <Link to="/myProgress" className="navbar-item" onClick={()=>dispatch(handleReceiveTasks(authedUser._id))}>

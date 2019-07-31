@@ -1,9 +1,11 @@
-import { createUser, gettingUser, gettingListOfUsers } from '../service/api'
+import { createUser, gettingUser, gettingListOfUsers, createLMSUser, gettingLmsUsers } from '../service/api'
 
 export const GET_USER = "GET_USER";
 export const CREATE_USER = "CREATE_USER";
 export const DELETE_USER = "DELETE_USER";
-export const GET_LIST_OF_USERS="GET_LIST_OF_USERS"
+export const GET_LIST_OF_USERS="GET_LIST_OF_USERS";
+export const CREATE_LMS_USER = "CREATE_LMS_USER"
+export const GET_LMS_USERS = "GET_LMS_USERS"
 
 export function getUser(userId) {
   return {
@@ -26,6 +28,21 @@ export function addUser(username) {
   };
 }
 
+export function addLMSUser(user) {
+  return {
+    type: CREATE_LMS_USER,
+    user
+  };
+}
+
+export function getLmsUsers(users) {
+  return {
+    type: GET_LMS_USERS,
+    users
+  };
+}
+
+
 export function deleteUser(userId) {
     return {
       type: DELETE_USER,
@@ -44,6 +61,28 @@ export function handleCreateUser(username, password, role) {
       })
       // calling action through dispatch and assigning it to username
         .then(({username}) => dispatch(addUser(username)));
+    };
+  }
+
+  // LMS user creation 
+  export function handleCreateLMSUser(formData) {
+    return (dispatch) => {
+      // invoke api method    
+      return createLMSUser({
+        formData
+      })
+      // calling action through dispatch and assigning it to username
+        .then(({user}) => dispatch(addLMSUser(user)));
+    };
+  }
+  
+
+  export function handleGetLMSUsers() {
+    return (dispatch) => {
+          
+      return gettingLmsUsers({
+      })
+        .then(({users}) => dispatch(getLmsUsers(users)));
     };
   }
 

@@ -35,6 +35,8 @@ export default class ReadingTextOut extends Component {
         let formData = new FormData();
             formData.append('questionImage', this.state.qFile);
             formData.append('timeRequired', this.state.timeRequired);
+
+            console.log("form Data here...", formData)
             
         this.props.handleAddFile1(formData)
 
